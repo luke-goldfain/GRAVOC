@@ -27,11 +27,17 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    private float vAxis, hAxis;
+
     private GameObject playerCamera;
 
     private float yaw = 0;
     private float pitch = 0;
 
+    private Vector3 collisionNormal;
+
+    private float currentJumpRefreshTime;
+    private float jumpRefreshTimer = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +53,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        hAxis = Input.GetAxisRaw("Horizontal");
+        vAxis = Input.GetAxisRaw("Vertical");
+
         UpdateLookRotate();
 
         UpdateStateBehavior();
@@ -92,6 +101,7 @@ public class PlayerController : MonoBehaviour
             case MovementState.onGround:
                 break;
             case MovementState.jumping:
+                currentJumpRefreshTime = 0f;
                 break;
             case MovementState.wallRunning:
                 break;
@@ -103,9 +113,6 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveGround()
     {
-        float hAxis = Input.GetAxisRaw("Horizontal");
-        float vAxis = Input.GetAxisRaw("Vertical");
-
         if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8))) // Normal running behavior
         {
             if (hAxis != 0 || vAxis != 0)
@@ -132,18 +139,51 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveJumping()
     {
-        float hAxis = Input.GetAxisRaw("Horizontal");
-        float vAxis = Input.GetAxisRaw("Vertical");
+        currentJumpRefreshTime += Time.deltaTime;
 
         if (hAxis != 0 || vAxis != 0)
         {
             rb.velocity = Vector3.Lerp(rb.velocity, (transform.forward * vAxis * airInfluence) + (transform.right * hAxis * airInfluence), 0.02f);
         }
+
+        if (currentJumpRefreshTime >= jumpRefreshTimer)
+        {
+            if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
+            {
+                ChangeMovementState(MovementState.onGround);
+            }
+            else
+            {
+                currentJumpRefreshTime = 0f;
+            }
+        }
     }
 
     private void UpdateMoveWallRun()
     {
-        throw new NotImplementedException();
+        if (vAxis > 0)
+        {
+            // We have to check the angle the player is facing relative to the wall to determine the direction they should run
+            if (Vector3.Angle(this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)) < Vector3.Angle(-this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)))
+            {
+                rb.velocity = moveSpeed * Vector3.Cross(Vector3.up, collisionNormal);
+            }
+            else
+            {
+                rb.velocity = -(moveSpeed * Vector3.Cross(Vector3.up, collisionNormal));
+            }
+        }
+        else
+        {
+            ChangeMovementState(MovementState.jumping);
+        }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce));
+
+            ChangeMovementState(MovementState.jumping);
+        }
     }
 
     private void ChangeMovementState(MovementState newState)
@@ -156,10 +196,31 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
+        collisionNormal = collision.GetContact(0).normal;
+
+        if (Mathf.Abs(collisionNormal.x + collisionNormal.z) > Mathf.Abs(collisionNormal.y) && currentMovState == MovementState.jumping) // If the collision is on a mostly vertical surface (a wall)
+        {
+            ChangeMovementState(MovementState.wallRunning);
+        }
+        else if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
         {
             ChangeMovementState(MovementState.onGround);
         }
+    }
 
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (currentMovState != MovementState.onGround && Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider)
+    //    {
+    //        ChangeMovementState(MovementState.onGround);
+    //    }
+    //}
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (currentMovState != MovementState.jumping && !Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
+        {
+            ChangeMovementState(MovementState.jumping);
+        }
     }
 }
