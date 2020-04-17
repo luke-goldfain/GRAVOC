@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IProjectable
 {
-    void Shoot();
+    void Shoot(Vector3 Direction);
     void Explode();
 }
