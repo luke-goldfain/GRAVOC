@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SceneFader
   - Wall
+  - Projectile
   layers:
   - Default
   - TransparentFX

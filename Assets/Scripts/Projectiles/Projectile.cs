@@ -13,6 +13,9 @@ public enum State
 
 public class Projectile : MonoBehaviour, IProjectable
 {
+    private Transform revertBackToNoParent;
+
+
     public float _movementSpeed;
     public float _maxBounces, _currentBounce;
     public int _damage;
@@ -43,53 +46,52 @@ public class Projectile : MonoBehaviour, IProjectable
         velocity = this.transform.forward * _movementSpeed;
         this._maxBounces = 15;
         this._currentBounce = 0;
+        revertBackToNoParent = this.transform;
+        this._state = State.SPAWNED;
     }
+
 
     private void Update()
     {
+
         switch (this._state)
         {
+            //This is will be for when the projectile is floating in a spawn point.
             case State.SPAWNED:
                 break;
+            //Want this state to be used for when a projectile gets picked up
             case State.PICKEDUP:
-                PickedUp();
                 break;
             case State.HELD:
-                //this.GetComponent<SphereCollider>().enabled = false;
+                Held();
                 break;
             case State.SHOT:
-                Shoot();
-                //this.GetComponent<SphereCollider>().enabled = true;
-                rb.velocity = velocity;
+                velocity = Direction.normalized * _movementSpeed;
                 this._state = State.BOUNCING;
                 break;
             case State.BOUNCING:
                 velocity = velocity.normalized * _movementSpeed;
-                rb.velocity = velocity;
                 Debug.DrawLine(transform.position, rb.velocity, Color.green);
                 Explode();
 
                 break;
         }
+                rb.velocity = velocity;
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(this._state == State.BOUNCING)
+        if(this._state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
         {
+            Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
+            Vector3 d, n, r;
 
-        Vector3 d, n, r;
+                d = velocity;
+                n = collision.GetContact(0).normal;
+                r = d - (2 * Vector3.Dot(d, n) * n);
 
-        foreach(var contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.red, 10);
-            d = velocity;
-            n = contact.normal;
-            r = d - (2 * Vector3.Dot(d, n) * n);
-
-            velocity = r;
-        }
+                velocity = r;
             this._currentBounce++;
 
         }
@@ -106,18 +108,40 @@ public class Projectile : MonoBehaviour, IProjectable
         }
     }
 
-    //Here is what will be called when a player has interacted and picked up the projectile
-    public void PickedUp()
+    public void Held()
     {
-        if (this.GetComponentInParent<PlayerController>())
-        {
-            this.transform.position = Vector3.Lerp(this.transform.position, this.playerReference.transform.position, this._movementSpeed * Time.deltaTime);
-        }
+        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.GetComponentInParent<PlayerController>().transform.position, 0.2f);
+    }
+
+    //Here is what will be called when a player has interacted and picked up the projectile
+    public void PickingUp(Transform targetTransform)
+    {
+        this.rb.isKinematic = true;
+        this.rb.detectCollisions = false;
+
+
+        this.transform.parent = targetTransform.transform;
+        
+        this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
+
+        this._state = State.HELD; 
+    }
+
+    private void PickingUp()
+    {
+        PickingUp(playerReference.transform);
     }
 
     //Shoot needs the direction of where it needs to fire from
     public virtual void Shoot(Vector3 Direction)
     {
+        if(this.rb.isKinematic == true && this.rb.detectCollisions == false)
+        {
+            this.rb.isKinematic = false;
+            this.rb.detectCollisions = true;
+            this.transform.parent = null;
+        }
+
         this.Direction = Direction;
         this._state = State.SHOT;
 
