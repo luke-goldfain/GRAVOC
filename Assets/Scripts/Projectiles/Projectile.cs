@@ -58,6 +58,7 @@ public class Projectile : MonoBehaviour, IProjectable
         {
             //This is will be for when the projectile is floating in a spawn point.
             case State.SPAWNED:
+                velocity = Vector3.zero;
                 break;
             //Want this state to be used for when a projectile gets picked up
             case State.PICKEDUP:
@@ -110,7 +111,7 @@ public class Projectile : MonoBehaviour, IProjectable
 
     public void Held()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.GetComponentInParent<PlayerController>().transform.position, 0.2f);
+        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.parent.transform.position, 0.2f);
     }
 
     //Here is what will be called when a player has interacted and picked up the projectile

@@ -29,7 +29,8 @@ public class PlayerController : MonoBehaviour
 
     private float vAxis, hAxis;
 
-    private GameObject playerCamera;
+    [HideInInspector]
+    public GameObject PlayerCamera;
 
     private float yaw = 0;
     private float pitch = 0;
@@ -44,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
 
-        playerCamera = this.GetComponentInChildren<Camera>().gameObject;
+        PlayerCamera = this.GetComponentInChildren<Camera>().gameObject;
 
         currentMovState = MovementState.jumping;
         prevMovState = currentMovState;
@@ -75,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, yaw, 0);
 
-        playerCamera.transform.eulerAngles = new Vector3(pitch, yaw, 0);
+        PlayerCamera.transform.eulerAngles = new Vector3(pitch, yaw, 0);
     }
 
     private void UpdateStateBehavior()
