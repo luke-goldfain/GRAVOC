@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     private float currentJumpRefreshTime;
     private float jumpRefreshTimer = 0.5f;
 
+    private float wallRunVerticalStart = 5f; // The starting value for the following variable
+    private Vector3 wallRunVerticalModifier; // The vertical modifier for wall running, allowing for an arc-like wall-run
+
     private float currentWallClimbTime;
 
     [SerializeField, Tooltip("The maximum time in seconds for which the player can climb a wall.")]
@@ -120,6 +123,7 @@ public class PlayerController : MonoBehaviour
                 currentJumpRefreshTime = 0f;
                 break;
             case MovementState.wallRunning:
+                wallRunVerticalModifier = wallRunVerticalStart * Vector3.Cross(collisionNormal, Vector3.Cross(Vector3.up, collisionNormal));
                 break;
             case MovementState.wallClimbing:
                 currentWallClimbTime = 0f;
@@ -187,12 +191,14 @@ public class PlayerController : MonoBehaviour
             // We have to check the angle the player is facing relative to the wall to determine the direction they should run
             if (Vector3.Angle(this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)) < Vector3.Angle(-this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)))
             {
-                rb.velocity = moveSpeed * Vector3.Cross(Vector3.up, collisionNormal);
+                rb.velocity = moveSpeed * Vector3.Cross(Vector3.up, collisionNormal) + wallRunVerticalModifier;
             }
             else
             {
-                rb.velocity = -(moveSpeed * Vector3.Cross(Vector3.up, collisionNormal));
+                rb.velocity = -(moveSpeed * Vector3.Cross(Vector3.up, collisionNormal)) + wallRunVerticalModifier;
             }
+
+            wallRunVerticalModifier += Vector3.Cross(collisionNormal, Vector3.Cross(Vector3.down, collisionNormal)) * 0.05f;
         }
         else
         {
@@ -201,7 +207,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce));
+            rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce) + (Vector3.Normalize(rb.velocity) * jumpForce));
 
             ChangeMovementState(MovementState.jumping);
         }
