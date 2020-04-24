@@ -229,6 +229,7 @@ MonoBehaviour:
   airInfluence: 1
   lookSensitivity: 3
   PlayerCamera: {fileID: 0}
+  wallClimbTimer: 1
 --- !u!54 &366354845374662741
 Rigidbody:
   m_ObjectHideFlags: 0
