@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1008630052030559927}
   - component: {fileID: 1008630052030559926}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Projectile_Prototype
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccfc8a47195184246b9928193a81dd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 15
-  _maxBounces: 12
+  _movementSpeed: 24
+  _maxBounces: 6
   _currentBounce: 0
   _damage: 1
   _state: 1
