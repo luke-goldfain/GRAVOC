@@ -3,21 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlameShots : Shot
+public class ExplosiveShots : Shot
 {
-    public FlameShots(Projectile p)
+    public ExplosiveShots(Projectile p)
     {
         projectile = p;
-    }
-
-    public override void Start()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Update()
-    {
-        throw new System.NotImplementedException();
     }
 
     public override void Explode()
@@ -54,5 +44,14 @@ public class FlameShots : Shot
     {
         throw new System.NotImplementedException();
     }
- 
+
+    public override void Start()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Update()
+    {
+        throw new System.NotImplementedException();
+    }
 }
