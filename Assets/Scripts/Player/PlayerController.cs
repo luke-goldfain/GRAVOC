@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 airVelocity;
 
+    public bool HitboxOnGround;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,8 @@ public class PlayerController : MonoBehaviour
 
         currentMovState = MovementState.jumping;
         prevMovState = currentMovState;
+
+        HitboxOnGround = false;
     }
 
     // Update is called once per frame
@@ -136,11 +140,22 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveGround()
     {
-        if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8))) // Normal running behavior
+        if (HitboxOnGround && Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8))) // Normal running behavior
         {
             if (hAxis != 0 || vAxis != 0)
             {
                 rb.velocity = Vector3.ProjectOnPlane((transform.forward * vAxis * moveSpeed) + (transform.right * hAxis * moveSpeed), hit.normal);
+            }
+            else
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.2f);
+            }
+        }
+        else if (HitboxOnGround)
+        {
+            if (hAxis != 0 || vAxis != 0)
+            {
+                rb.velocity = (transform.forward * vAxis * moveSpeed) + (transform.right * hAxis * moveSpeed);
             }
             else
             {
@@ -171,7 +186,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentJumpRefreshTime >= jumpRefreshTimer)
         {
-            if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
+            if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
             {
                 ChangeMovementState(MovementState.onGround);
             }
@@ -248,7 +263,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ChangeMovementState(MovementState newState)
+    public void ChangeMovementState(MovementState newState)
     {
         if (newState != currentMovState)
         {
@@ -272,7 +287,7 @@ public class PlayerController : MonoBehaviour
                 ChangeMovementState(MovementState.wallClimbing);
             }
         }
-        else if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
+        else if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
         {
             ChangeMovementState(MovementState.onGround);
         }
@@ -292,11 +307,6 @@ public class PlayerController : MonoBehaviour
         if (currentMovState == MovementState.wallClimbing)
         {
             rb.AddForce(-collisionNormal * wallClimbTopForce);
-        }
-
-        if (currentMovState != MovementState.jumping && !Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
-        {
-            ChangeMovementState(MovementState.jumping);
         }
     }
 }
