@@ -225,6 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81357b48d55d1f045b38437c540f7f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerNumber: 1
   moveSpeed: 10
   jumpForce: 350
   airInfluence: 1
@@ -305,6 +306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f25cbe7b4ccff1429e4afe267f6307b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pc: {fileID: 366354845374662740}
   gravityPulsePrefab: {fileID: 6560664116315438449, guid: e72c164ece1c6e643a6fac494fbfdf0c,
     type: 3}
   pulseCooldown: 1

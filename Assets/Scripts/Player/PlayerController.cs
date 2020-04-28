@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField, Tooltip("The player number for detecting input.")]
+    public int PlayerNumber;
+
     [SerializeField, Tooltip("The speed at which the character moves.")]
     private float moveSpeed;
 
@@ -24,6 +27,13 @@ public class PlayerController : MonoBehaviour
 
     private MovementState currentMovState;
     private MovementState prevMovState;
+
+    private enum controlScheme
+    {
+        mkb, cont
+    }
+
+    private controlScheme currentControls;
 
     private Rigidbody rb;
 
@@ -66,14 +76,25 @@ public class PlayerController : MonoBehaviour
         currentMovState = MovementState.jumping;
         prevMovState = currentMovState;
 
+        currentControls = controlScheme.cont;
+
         HitboxOnGround = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
+        hAxis = Input.GetAxisRaw("P" + PlayerNumber + "Horizontal");
+        vAxis = Input.GetAxisRaw("P" + PlayerNumber + "Vertical");
+
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        {
+            currentControls = controlScheme.mkb;
+        }
+        if (Input.GetAxis("P" + PlayerNumber + "AltHorizontal") != 0 || Input.GetAxis("P" + PlayerNumber + "AltVertical") != 0)
+        {
+            currentControls = controlScheme.cont;
+        }
 
         UpdateLookRotate();
 
@@ -87,9 +108,18 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLookRotate()
     {
-        yaw += lookSensitivity * Input.GetAxis("Mouse X");
-        pitch -= lookSensitivity * Input.GetAxis("Mouse Y");
 
+        if (currentControls == controlScheme.mkb)
+        {
+            yaw += lookSensitivity * Input.GetAxis("Mouse X");
+            pitch -= lookSensitivity * Input.GetAxis("Mouse Y");
+        }
+        else if (currentControls == controlScheme.cont)
+        {
+            yaw += lookSensitivity * Input.GetAxis("P" + PlayerNumber + "AltHorizontal");
+            pitch += lookSensitivity * Input.GetAxis("P" + PlayerNumber + "AltVertical");
+        }
+         
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         transform.eulerAngles = new Vector3(0, yaw, 0);
@@ -167,7 +197,7 @@ public class PlayerController : MonoBehaviour
             ChangeMovementState(MovementState.jumping);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
         {
             rb.AddForce(new Vector3(0f, jumpForce, 0f)); // Add jumping force
 
@@ -220,7 +250,7 @@ public class PlayerController : MonoBehaviour
             ChangeMovementState(MovementState.jumping);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
         {
             rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce) + (Vector3.Normalize(rb.velocity) * jumpForce));
 
@@ -246,7 +276,7 @@ public class PlayerController : MonoBehaviour
                 ChangeMovementState(MovementState.jumping);
             }
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
             {
                 rb.AddForce(collisionNormal * jumpForce);
                 
