@@ -39,12 +39,6 @@ public class PlayerController : MonoBehaviour
 
     private float vAxis, hAxis;
 
-    [HideInInspector]
-    public GameObject PlayerCamera;
-
-    private float yaw = 0;
-    private float pitch = 0;
-
     private Vector3 collisionNormal;
 
     private float currentJumpRefreshTime;
@@ -64,14 +58,19 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 airVelocity;
 
+    [HideInInspector]
     public bool HitboxOnGround;
+
+    [SerializeField, Tooltip("The camera attached to this player, to be assigned via prefab.")]
+    public Camera PlayerCamera;
+
+    private float yaw = 0;
+    private float pitch = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
-
-        PlayerCamera = this.GetComponentInChildren<Camera>().gameObject;
 
         currentMovState = MovementState.jumping;
         prevMovState = currentMovState;
@@ -87,7 +86,7 @@ public class PlayerController : MonoBehaviour
         hAxis = Input.GetAxisRaw("P" + PlayerNumber + "Horizontal");
         vAxis = Input.GetAxisRaw("P" + PlayerNumber + "Vertical");
 
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        if (this.PlayerNumber == 1 && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
         {
             currentControls = controlScheme.mkb;
         }
@@ -338,5 +337,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(-collisionNormal * wallClimbTopForce);
         }
+    }
+
+    public void AssignRotation(Vector3 euler)
+    {
+        pitch = euler.x;
+        yaw = euler.y;
     }
 }

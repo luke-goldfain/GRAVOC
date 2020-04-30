@@ -101,7 +101,7 @@ public class GravGunController : MonoBehaviour
         // TODO: Object pool these
         currentPulse = Instantiate(gravityPulsePrefab, shotHoldTransform.position, shotHoldTransform.rotation);
 
-        currentPulseCollisionScript = currentPulse.GetComponentInChildren<ProjectileCollideNotifyGun>();
+        currentPulseCollisionScript = currentPulse.GetComponentInChildren<ProjectileCollideNotifyGun>(); // TODO: Object Pool
         currentPulseCollisionScript.GravGun = this;
 
         currentPulseHitbox = currentPulseCollisionScript.gameObject;

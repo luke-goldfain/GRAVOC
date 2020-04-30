@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 366354843914776116}
   - component: {fileID: 366354843914776117}
-  - component: {fileID: 366354843914774986}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +45,7 @@ Camera:
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
   m_FocalLength: 50
@@ -58,7 +57,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 80
+  field of view: 55.4016
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -76,14 +75,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &366354843914774986
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 366354843914774987}
-  m_Enabled: 1
 --- !u!1 &366354844458851063
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,9 +221,9 @@ MonoBehaviour:
   jumpForce: 350
   airInfluence: 1
   lookSensitivity: 3
-  PlayerCamera: {fileID: 0}
   wallClimbTimer: 1
   HitboxOnGround: 0
+  PlayerCamera: {fileID: 366354843914776117}
 --- !u!54 &366354845374662741
 Rigidbody:
   m_ObjectHideFlags: 0
