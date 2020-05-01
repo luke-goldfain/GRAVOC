@@ -36,8 +36,13 @@ public class Projectile : MonoBehaviour
         _shot = new ExplosiveShots(this);
     }
 
-    void setFlameShots()
+    void setScatterShots()
     {
-        _shot = new FlameShots(this);
+        _shot = new ScatterShots(this);
+    }
+
+    public virtual void OnCollisionEnter(Collision collision)
+    {
+        _shot.OnCollisionEnter(collision);
     }
 }

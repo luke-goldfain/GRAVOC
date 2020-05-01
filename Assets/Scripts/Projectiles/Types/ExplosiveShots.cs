@@ -8,7 +8,22 @@ public class ExplosiveShots : Shot
     public ExplosiveShots(Projectile p)
     {
         projectile = p;
+        _movementSpeed = 20f;
+        velocity = p.transform.forward * _movementSpeed;
+        _maxBounces = 15;
+        _currentBounce = 0;
+        _state = State.SPAWNED;
     }
+    public override void Start()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void Update()
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     public override void Explode()
     {
@@ -45,13 +60,5 @@ public class ExplosiveShots : Shot
         throw new System.NotImplementedException();
     }
 
-    public override void Start()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Update()
-    {
-        throw new System.NotImplementedException();
-    }
+   
 }
