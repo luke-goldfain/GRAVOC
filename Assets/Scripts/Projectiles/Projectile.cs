@@ -11,7 +11,7 @@ public enum State
     BOUNCING
 }
 
-public class Projectile : MonoBehaviour, IProjectable
+public class Projectile : ProjectileMotion, IProjectable
 {
     private Transform revertBackToNoParent;
 
@@ -81,7 +81,7 @@ public class Projectile : MonoBehaviour, IProjectable
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    public override void OnCollisionEnter(Collision collision)
     {
         if(this._state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
         {

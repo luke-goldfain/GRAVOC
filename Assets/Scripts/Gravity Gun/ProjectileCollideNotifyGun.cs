@@ -9,6 +9,7 @@ public class ProjectileCollideNotifyGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        
         if (other.tag == "Projectile")
         {
             GravGun.GrabProjectile(other.gameObject.GetComponent<Projectile>());
