@@ -8,10 +8,7 @@ public class NormalShot : Projectile
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        _movementSpeed = 20f;
-        rb = GetComponent<Rigidbody>();
         velocity = this.transform.forward * _movementSpeed;
-        this._maxBounces = 15;
         this._currentBounce = 0;
         revertBackToNoParent = this.transform;
         this._state = State.SPAWNED;
@@ -20,6 +17,7 @@ public class NormalShot : Projectile
     // Update is called once per frame
     void Update()
     {
+
         switch (this._state)
         {
             //This is will be for when the projectile is floating in a spawn point.
@@ -45,5 +43,11 @@ public class NormalShot : Projectile
         }
         rb.velocity = velocity;
     }
+
+    //public override void OnCollisionEnter(Collision collision)
+    //{
+    //    //base.OnCollisionEnter(collision);
+    //    this._movementSpeed = 50;
+    //}
 
 }

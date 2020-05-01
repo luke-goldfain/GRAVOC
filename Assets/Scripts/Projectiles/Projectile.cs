@@ -11,11 +11,9 @@ public enum State
     BOUNCING
 }
 
-public abstract class Projectile : ProjectileMotion, IProjectable
+public abstract class Projectile : MonoBehaviour, IProjectable
 {
     protected Transform revertBackToNoParent;
-
-
     public float _movementSpeed;
     public float _maxBounces, _currentBounce;
     public int _damage;
@@ -109,13 +107,13 @@ public abstract class Projectile : ProjectileMotion, IProjectable
         }
     }
 
-    public virtual void Held()
+    public void Held()
     {
         this.transform.position = Vector3.Lerp(this.transform.position, this.transform.parent.transform.position, 0.2f);
     }
 
     //Here is what will be called when a player has interacted and picked up the projectile
-    public virtual void PickingUp(Transform targetTransform)
+    public void PickingUp(Transform targetTransform)
     {
         this.rb.isKinematic = true;
         this.rb.detectCollisions = false;
