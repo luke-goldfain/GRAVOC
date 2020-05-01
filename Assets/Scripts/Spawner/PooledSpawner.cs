@@ -6,7 +6,7 @@ public class PooledSpawner : Spawner
 {
     protected override GameObject getSpawnObject()
     {
-        GameObject spawn = ObjectPoolingManager.Instance.Getobject("Projectile");
+        GameObject spawn = ObjectPoolingManager.Instance.Getobject("Projectile_Prototype");
         if(spawn != null)
         {
             spawn.SetActive(true);

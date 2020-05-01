@@ -109,4 +109,4 @@ MonoBehaviour:
     type: 3}
   Enabled: 0
   Projectile: {fileID: 0}
-  SpawnTime: 4
+  SpawnTime: 2

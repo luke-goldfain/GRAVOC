@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd526dc717d641747b8699a22e6e81e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 0}
+  Projectile: {fileID: 1008630052030559925, guid: 5eca75cf26e88e84d82ff7d8f404aa23,
+    type: 3}
   InitialPoolSize: 1
   MaxPoolSize: 5
