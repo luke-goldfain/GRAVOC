@@ -7,7 +7,7 @@ public class Pool : MonoBehaviour
     public GameObject Projectile;
 
     public int InitialPoolSize = 1;
-    public int MaxPoolSize = 15;
+    public int MaxPoolSize = 5;
 
 
     // Start is called before the first frame update
@@ -24,7 +24,7 @@ public class Pool : MonoBehaviour
 
     private void CreateObjectPools()
     {
-        ObjectPoolingManager.Instance.CreatePool(Projectile, this.InitialPoolSize, 15, false);
+        ObjectPoolingManager.Instance.CreatePool(Projectile, this.InitialPoolSize, this.MaxPoolSize, false);
         ObjectPoolingManager.Instance.PoolGameObject = this.gameObject;
     }
 }

@@ -9,10 +9,10 @@ public class ProjectileSpawner : PooledSpawner
     public override void SetupSpawnObject(GameObject go)
     {
         base.SetupSpawnObject(go);
-        if(GetComponent<Projectile>() != null)
+        if(go.GetComponent<Projectile>() != null)
         {
             Projectile proj = go.GetComponent<Projectile>();
-            proj.gameObject.transform.position = this.transform.position;
+            proj.gameObject.transform.position = this.transform.position + new Vector3(0, this.transform.position.y + proj.gameObject.transform.position.y, 0);
         }
     }
 
