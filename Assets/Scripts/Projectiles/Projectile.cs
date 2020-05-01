@@ -8,7 +8,8 @@ public enum State
     SHOT,
     PICKEDUP,
     SPAWNED,
-    BOUNCING
+    BOUNCING,
+    DONE
 }
 
 public class Projectile : MonoBehaviour, IProjectable
@@ -106,6 +107,7 @@ public class Projectile : MonoBehaviour, IProjectable
         {
             this.gameObject.SetActive(false);
             this.GetComponent<SphereCollider>().enabled = false;
+            this._state = State.DONE;
         }
     }
 
