@@ -16,13 +16,13 @@ public class ProjectileMotion : MonoBehaviour
         
     }
 
-    public virtual void OnCollisionEnter(Collision collision)
-    {
+    //public virtual void OnCollisionEnter(Collision collision)
+    //{
         
-    }
+    //}
 
-    public virtual void OnTriggerEnter(Collider other)
-    {
+    //public virtual void OnTriggerEnter(Collider other)
+    //{
         
-    }
+    //}
 }

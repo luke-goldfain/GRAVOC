@@ -11,9 +11,9 @@ public enum State
     BOUNCING
 }
 
-public class Projectile : ProjectileMotion, IProjectable
+public abstract class Projectile : ProjectileMotion, IProjectable
 {
-    private Transform revertBackToNoParent;
+    protected Transform revertBackToNoParent;
 
 
     public float _movementSpeed;
@@ -23,7 +23,7 @@ public class Projectile : ProjectileMotion, IProjectable
 
     public PlayerController playerReference;
 
-    private Vector3 _direction;
+    protected Vector3 _direction;
     public Vector3 Direction
     {
         get { return this._direction; }
@@ -36,8 +36,8 @@ public class Projectile : ProjectileMotion, IProjectable
         }
     }
 
-    private Vector3 velocity;
-    private Rigidbody rb;
+    protected Vector3 velocity;
+    protected Rigidbody rb;
 
     private void Start()
     {
@@ -81,7 +81,7 @@ public class Projectile : ProjectileMotion, IProjectable
     }
 
 
-    public override void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         if(this._state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
         {
@@ -109,13 +109,13 @@ public class Projectile : ProjectileMotion, IProjectable
         }
     }
 
-    public void Held()
+    public virtual void Held()
     {
         this.transform.position = Vector3.Lerp(this.transform.position, this.transform.parent.transform.position, 0.2f);
     }
 
     //Here is what will be called when a player has interacted and picked up the projectile
-    public void PickingUp(Transform targetTransform)
+    public virtual void PickingUp(Transform targetTransform)
     {
         this.rb.isKinematic = true;
         this.rb.detectCollisions = false;
@@ -136,7 +136,7 @@ public class Projectile : ProjectileMotion, IProjectable
     //Shoot needs the direction of where it needs to fire from
     public virtual void Shoot(Vector3 Direction)
     {
-        if(this.rb.isKinematic == true && this.rb.detectCollisions == false)
+        if (this.rb.isKinematic == true && this.rb.detectCollisions == false)
         {
             this.rb.isKinematic = false;
             this.rb.detectCollisions = true;

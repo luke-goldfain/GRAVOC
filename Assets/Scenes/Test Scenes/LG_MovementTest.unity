@@ -519,6 +519,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008630052030559925, guid: 5eca75cf26e88e84d82ff7d8f404aa23,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1008630052030559926, guid: 5eca75cf26e88e84d82ff7d8f404aa23,
         type: 3}
       propertyPath: _state
@@ -1143,6 +1148,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Projectile (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1008630052030559925, guid: 5eca75cf26e88e84d82ff7d8f404aa23,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1008630052030559926, guid: 5eca75cf26e88e84d82ff7d8f404aa23,
         type: 3}
       propertyPath: _state
@@ -1315,8 +1325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69f353c993957914590e32326cd84d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 20
-  _maxBounces: 6
+  _movementSpeed: 0
+  _maxBounces: 0
   _currentBounce: 0
   _damage: 0
   _state: 3
