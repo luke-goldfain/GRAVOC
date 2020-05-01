@@ -122,6 +122,9 @@ public class Projectile : MonoBehaviour, IProjectable
 
 
         this.transform.parent = targetTransform.transform;
+
+        // Luke G addition: Assign player reference when picked up, used to determine which player this should hurt when shot
+        this.playerReference = targetTransform.transform.root.GetComponent<PlayerController>();
         
         this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
 
