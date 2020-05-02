@@ -12,7 +12,8 @@ public class ProjectileSpawner : PooledSpawner
         if(go.GetComponent<Projectile>() != null)
         {
             Projectile proj = go.GetComponent<Projectile>();
-            proj.gameObject.transform.position = this.transform.position + new Vector3(0, this.transform.position.y + proj.gameObject.transform.position.y, 0);
+            proj.gameObject.transform.position = this.transform.position + new Vector3(0, this.transform.lossyScale.y, 0);
+            proj.SetUpProjectile();
         }
     }
 

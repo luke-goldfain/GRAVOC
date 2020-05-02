@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 24
-  _maxBounces: 6
+  _maxBounces: 3
   _currentBounce: 0
   _damage: 1
   _state: 3

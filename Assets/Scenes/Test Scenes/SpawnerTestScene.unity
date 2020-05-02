@@ -439,6 +439,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7568060547470646604, guid: 3713356ae134c794a8d64ddd1bf3397d,
+        type: 3}
+      propertyPath: MaxPoolSize
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7568060547470646605, guid: 3713356ae134c794a8d64ddd1bf3397d,
         type: 3}
       propertyPath: m_Name
@@ -962,6 +967,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ContinuousProjectileSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141358164652513109, guid: 8755eeeab18736e4996cd7916ff2d3f9,
+        type: 3}
+      propertyPath: SpawnTime
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8141358164652513110, guid: 8755eeeab18736e4996cd7916ff2d3f9,
         type: 3}

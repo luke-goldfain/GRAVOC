@@ -37,6 +37,16 @@ public class Projectile : MonoBehaviour, IProjectable
         }
     }
 
+    public void SetUpProjectile()
+    {
+        rb = GetComponent<Rigidbody>();
+        this._state = State.SPAWNED;
+        this._currentBounce = 0;
+        this.velocity = this.transform.forward * _movementSpeed;
+        this.gameObject.SetActive(true);
+        this.GetComponent<SphereCollider>().enabled = true;
+    }
+
     private Vector3 velocity;
     private Rigidbody rb;
 
@@ -45,7 +55,6 @@ public class Projectile : MonoBehaviour, IProjectable
         _movementSpeed = 20f;
         rb = GetComponent<Rigidbody>();
         velocity = this.transform.forward * _movementSpeed;
-        this._maxBounces = 15;
         this._currentBounce = 0;
         revertBackToNoParent = this.transform;
         this._state = State.SPAWNED;

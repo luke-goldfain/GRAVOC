@@ -13,4 +13,15 @@ public class PooledSpawner : Spawner
         }
         return spawn;
     }
+
+    protected override void removeObjectInListToRemove()
+    {
+        foreach(GameObject go in this.objectsToRemove)
+        {
+            this.gameObjects.Remove(go);
+            go.transform.parent = null;
+            go.SetActive(false);
+        }
+        this.objectsToRemove.Clear();
+    }
 }
