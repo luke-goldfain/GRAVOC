@@ -33,7 +33,33 @@ public class Projectile : MonoBehaviour
 
     void setExplosiveShots()
     {
-        _shot = new ExplosiveShots(this);
+        if (this._currentBounce >= _maxBounces)
+        {
+            this.gameObject.SetActive(false);
+            this.GetComponent<SphereCollider>().enabled = false;
+        }
+    }
+
+    public void Held()
+    {
+        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.parent.transform.position, 0.2f);
+    }
+
+    //Here is what will be called when a player has interacted and picked up the projectile
+    public void PickingUp(Transform targetTransform)
+    {
+        this.rb.isKinematic = true;
+        this.rb.detectCollisions = false;
+
+
+        this.transform.parent = targetTransform.transform;
+
+        // Luke G addition: Assign player reference when picked up, used to determine which player this should hurt when shot
+        this.playerReference = targetTransform.transform.root.GetComponent<PlayerController>();
+        
+        this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
+
+        this._state = State.HELD; 
     }
 
     void setScatterShots()

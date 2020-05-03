@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField, Tooltip("The player number for detecting input.")]
+    public int PlayerNumber;
+
     [SerializeField, Tooltip("The speed at which the character moves.")]
     private float moveSpeed;
 
@@ -19,43 +22,80 @@ public class PlayerController : MonoBehaviour
 
     public enum MovementState
     {
-        onGround, jumping, wallRunning
+        onGround, jumping, wallRunning, wallClimbing
     }
 
     private MovementState currentMovState;
     private MovementState prevMovState;
 
+    private enum controlScheme
+    {
+        mkb, cont
+    }
+
+    private controlScheme currentControls;
+
     private Rigidbody rb;
 
     private float vAxis, hAxis;
-
-    [HideInInspector]
-    public GameObject PlayerCamera;
-
-    private float yaw = 0;
-    private float pitch = 0;
 
     private Vector3 collisionNormal;
 
     private float currentJumpRefreshTime;
     private float jumpRefreshTimer = 0.5f;
 
+    private float wallRunVerticalStart = 5f; // The starting value for the following variable
+    private Vector3 wallRunVerticalModifier; // The vertical modifier for wall running, allowing for an arc-like wall-run
+
+    private float currentWallClimbTime;
+
+    [SerializeField, Tooltip("The maximum time in seconds for which the player can climb a wall.")]
+    private float wallClimbTimer = 1f;
+
+    private float wallClimbTopForce = 200f; // The force exerted on the player when they reach the top of a wall by climbing it
+
+    private bool hasWallClimbedThisJump;
+
+    private Vector3 airVelocity;
+
+    [HideInInspector]
+    public bool HitboxOnGround;
+
+    [SerializeField, Tooltip("The camera attached to this player, to be assigned via prefab.")]
+    public Camera PlayerCamera;
+
+    private float yaw = 0;
+    private float pitch = 0;
+
+    public LocalPlayerSpawner PlayerSpawnerInstance;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
 
-        PlayerCamera = this.GetComponentInChildren<Camera>().gameObject;
-
         currentMovState = MovementState.jumping;
         prevMovState = currentMovState;
+
+        currentControls = controlScheme.cont;
+
+        HitboxOnGround = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        hAxis = Input.GetAxisRaw("Horizontal");
-        vAxis = Input.GetAxisRaw("Vertical");
+        hAxis = Input.GetAxisRaw("P" + PlayerNumber + "Horizontal");
+        vAxis = Input.GetAxisRaw("P" + PlayerNumber + "Vertical");
+
+        if (this.PlayerNumber == 1 && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
+        {
+            currentControls = controlScheme.mkb;
+        }
+        if (Input.GetAxis("P" + PlayerNumber + "AltHorizontal") != 0 || Input.GetAxis("P" + PlayerNumber + "AltVertical") != 0)
+        {
+            currentControls = controlScheme.cont;
+        }
 
         UpdateLookRotate();
 
@@ -69,9 +109,18 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateLookRotate()
     {
-        yaw += lookSensitivity * Input.GetAxis("Mouse X");
-        pitch -= lookSensitivity * Input.GetAxis("Mouse Y");
 
+        if (currentControls == controlScheme.mkb)
+        {
+            yaw += lookSensitivity * Input.GetAxis("Mouse X");
+            pitch -= lookSensitivity * Input.GetAxis("Mouse Y");
+        }
+        else if (currentControls == controlScheme.cont)
+        {
+            yaw += lookSensitivity * Input.GetAxis("P" + PlayerNumber + "AltHorizontal");
+            pitch += lookSensitivity * Input.GetAxis("P" + PlayerNumber + "AltVertical");
+        }
+         
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         transform.eulerAngles = new Vector3(0, yaw, 0);
@@ -92,6 +141,9 @@ public class PlayerController : MonoBehaviour
             case MovementState.wallRunning:
                 UpdateMoveWallRun();
                 break;
+            case MovementState.wallClimbing:
+                UpdateMoveWallClimb();
+                break;
         }
     }
 
@@ -100,11 +152,16 @@ public class PlayerController : MonoBehaviour
         switch (currentMovState)
         {
             case MovementState.onGround:
+                hasWallClimbedThisJump = false;
                 break;
             case MovementState.jumping:
                 currentJumpRefreshTime = 0f;
                 break;
             case MovementState.wallRunning:
+                wallRunVerticalModifier = wallRunVerticalStart * Vector3.Cross(collisionNormal, Vector3.Cross(Vector3.up, collisionNormal));
+                break;
+            case MovementState.wallClimbing:
+                currentWallClimbTime = 0f;
                 break;
         }
 
@@ -114,11 +171,22 @@ public class PlayerController : MonoBehaviour
 
     private void UpdateMoveGround()
     {
-        if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8))) // Normal running behavior
+        if (HitboxOnGround && Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8))) // Normal running behavior
         {
             if (hAxis != 0 || vAxis != 0)
             {
                 rb.velocity = Vector3.ProjectOnPlane((transform.forward * vAxis * moveSpeed) + (transform.right * hAxis * moveSpeed), hit.normal);
+            }
+            else
+            {
+                rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.2f);
+            }
+        }
+        else if (HitboxOnGround)
+        {
+            if (hAxis != 0 || vAxis != 0)
+            {
+                rb.velocity = (transform.forward * vAxis * moveSpeed) + (transform.right * hAxis * moveSpeed);
             }
             else
             {
@@ -130,7 +198,7 @@ public class PlayerController : MonoBehaviour
             ChangeMovementState(MovementState.jumping);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
         {
             rb.AddForce(new Vector3(0f, jumpForce, 0f)); // Add jumping force
 
@@ -149,7 +217,7 @@ public class PlayerController : MonoBehaviour
 
         if (currentJumpRefreshTime >= jumpRefreshTimer)
         {
-            if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
+            if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
             {
                 ChangeMovementState(MovementState.onGround);
             }
@@ -158,6 +226,8 @@ public class PlayerController : MonoBehaviour
                 currentJumpRefreshTime = 0f;
             }
         }
+
+        airVelocity = rb.velocity; // This is used in place of velocity when doing certain things, due to velocity getting changed before comparisons can be made (collisions etc)
     }
 
     private void UpdateMoveWallRun()
@@ -167,27 +237,64 @@ public class PlayerController : MonoBehaviour
             // We have to check the angle the player is facing relative to the wall to determine the direction they should run
             if (Vector3.Angle(this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)) < Vector3.Angle(-this.transform.forward, Vector3.Cross(Vector3.up, collisionNormal)))
             {
-                rb.velocity = moveSpeed * Vector3.Cross(Vector3.up, collisionNormal);
+                rb.velocity = moveSpeed * Vector3.Cross(Vector3.up, collisionNormal) + wallRunVerticalModifier;
             }
             else
             {
-                rb.velocity = -(moveSpeed * Vector3.Cross(Vector3.up, collisionNormal));
+                rb.velocity = -(moveSpeed * Vector3.Cross(Vector3.up, collisionNormal)) + wallRunVerticalModifier;
             }
+
+            wallRunVerticalModifier += Vector3.Cross(collisionNormal, Vector3.Cross(Vector3.down, collisionNormal)) * 0.05f;
         }
         else
         {
             ChangeMovementState(MovementState.jumping);
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
         {
-            rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce));
+            rb.AddForce((collisionNormal * jumpForce) + (Vector3.up * jumpForce) + (Vector3.Normalize(rb.velocity) * jumpForce));
 
             ChangeMovementState(MovementState.jumping);
         }
     }
 
-    private void ChangeMovementState(MovementState newState)
+    private void UpdateMoveWallClimb()
+    {
+        currentWallClimbTime += Time.deltaTime;
+
+        if (currentWallClimbTime < wallClimbTimer && !hasWallClimbedThisJump)
+        {
+            if (vAxis > 0)
+            {
+                // Move the player upwards along the wall. Since this will not always be straight upwards, we do some cross multiplication to decide the "up" direction.
+                rb.velocity = moveSpeed * Vector3.Cross(collisionNormal, Vector3.Cross(Vector3.up, collisionNormal));
+            }
+            else
+            {
+                hasWallClimbedThisJump = true;
+
+                ChangeMovementState(MovementState.jumping);
+            }
+
+            if (Input.GetButtonDown("P" + PlayerNumber + "Jump"))
+            {
+                rb.AddForce(collisionNormal * jumpForce);
+                
+                ChangeMovementState(MovementState.jumping);
+            }
+        }
+        else if (!hasWallClimbedThisJump)
+        {
+            currentWallClimbTime = 0f;
+
+            hasWallClimbedThisJump = true;
+
+            ChangeMovementState(MovementState.jumping);
+        }
+    }
+
+    public void ChangeMovementState(MovementState newState)
     {
         if (newState != currentMovState)
         {
@@ -197,15 +304,44 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collisionNormal = collision.GetContact(0).normal;
+        // If the collision is a projectile...
+        if (collision.gameObject.tag == "Projectile")
+        {
+            Projectile projScript = collision.gameObject.GetComponent<Projectile>();
 
-        if (Mathf.Abs(collisionNormal.x + collisionNormal.z) > Mathf.Abs(collisionNormal.y) && currentMovState == MovementState.jumping) // If the collision is on a mostly vertical surface (a wall)
-        {
-            ChangeMovementState(MovementState.wallRunning);
+            // If the projectile was shot by a player other than this player...
+            if (projScript.playerReference != null && projScript.playerReference != this)
+            {
+                // Hand this PlayerController over to the player spawner
+                this.PlayerSpawnerInstance.SpawnPlayerAfterCooldown(this);
+
+                // Should expand on this once spawners are finished with object pooling and projectile respawning
+                collision.gameObject.SetActive(false);
+
+                // This one is fine, though
+                this.gameObject.SetActive(false);
+            }
         }
-        else if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
+        else
         {
-            ChangeMovementState(MovementState.onGround);
+            collisionNormal = collision.GetContact(0).normal;
+
+            if (Mathf.Abs(collisionNormal.x + collisionNormal.z) > Mathf.Abs(collisionNormal.y) && currentMovState == MovementState.jumping) // If the collision is on a mostly vertical surface (a wall)
+            {
+                // Discern whether to have the player start wall running or wall climbing
+                if (Vector3.Angle(collisionNormal, airVelocity) < 140f)
+                {
+                    ChangeMovementState(MovementState.wallRunning);
+                }
+                else //if (rb.velocity.y > 0f) 
+                {
+                    ChangeMovementState(MovementState.wallClimbing);
+                }
+            }
+            else if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
+            {
+                ChangeMovementState(MovementState.onGround);
+            }
         }
     }
 
@@ -219,9 +355,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (currentMovState != MovementState.jumping && !Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)))
+        // If we climbed up a wall, add a forward impulse to simulate getting "over" the wall
+        if (currentMovState == MovementState.wallClimbing)
         {
-            ChangeMovementState(MovementState.jumping);
+            rb.AddForce(-collisionNormal * wallClimbTopForce);
         }
+    }
+
+    public void AssignRotation(Vector3 euler)
+    {
+        pitch = euler.x;
+        yaw = euler.y;
     }
 }
