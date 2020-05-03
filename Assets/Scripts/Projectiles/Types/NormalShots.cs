@@ -9,8 +9,6 @@ namespace Assets.Scripts.Projectiles.Types
 {
     public class NormalShots : Shot
     {
-        //Bounces need to be fix ! :)
-
         public NormalShots(Projectile p)
         {
             projectile = p;
