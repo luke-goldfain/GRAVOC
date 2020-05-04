@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
 
     void setExplosiveShots()
     {
-        if (this._currentBounce >= _maxBounces)
+        if (this._shot._currentBounce >= this._shot._maxBounces)
         {
             this.gameObject.SetActive(false);
             this.GetComponent<SphereCollider>().enabled = false;
@@ -54,12 +54,12 @@ public class Projectile : MonoBehaviour
 
         this.transform.parent = targetTransform.transform;
 
-        // Luke G addition: Assign player reference when picked up, used to determine which player this should hurt when shot
+        // Assign player reference when picked up, used to determine which player this should hurt when shot
         this.playerReference = targetTransform.transform.root.GetComponent<PlayerController>();
         
         this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
 
-        this._state = State.HELD; 
+        this._shot._state = State.HELD; 
     }
 
     void setScatterShots()
