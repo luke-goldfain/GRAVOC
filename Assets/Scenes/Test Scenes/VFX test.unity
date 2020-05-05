@@ -350,7 +350,7 @@ PrefabInstance:
     - target: {fileID: 7605640998385379416, guid: b31b2fcaaf4b7df4f9a8bace01fed3b1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 137.01
+      value: 125.2
       objectReference: {fileID: 0}
     - target: {fileID: 7605640998385379416, guid: b31b2fcaaf4b7df4f9a8bace01fed3b1,
         type: 3}
@@ -360,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 7605640998385379416, guid: b31b2fcaaf4b7df4f9a8bace01fed3b1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 144.15
+      value: 167.59
       objectReference: {fileID: 0}
     - target: {fileID: 7605640998385379416, guid: b31b2fcaaf4b7df4f9a8bace01fed3b1,
         type: 3}
@@ -5389,6 +5389,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fb14f28e19473c44a41de27336e9cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShaderFloatProperty: 5
+  FloatCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GraphTimeMultiplier: 1
+  GraphIntensityMultiplier: 1
+  IsLoop: 0
 --- !u!114 &8699967681884377322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5401,6 +5429,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d823863b34e4648afb042b39991109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  Duration: 2
+  Speed: 22
+  Magnitude: 1
+  DistanceForce: 100
+  RotationDamper: 2
+  IsEnabled: 1
+  canUpdate: 0
 --- !u!114 &8699974599999096614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5413,6 +5472,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25fb9b9ea5474f04dbab136c8585d48e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  GraphTimeMultiplier: 1
+  GraphIntensityMultiplier: 1
+  IsLoop: 0
+  UseShadowsIfPossible: 0
+  canUpdate: 0
 --- !u!114 &8700019827804155158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5425,6 +5513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e21670774e265b4f8fd1a32b2a739a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsScreenSpace: 1
 --- !u!4 &8730110737817289084
 Transform:
   m_ObjectHideFlags: 0
