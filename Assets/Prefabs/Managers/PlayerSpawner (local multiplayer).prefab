@@ -47,4 +47,3 @@ MonoBehaviour:
     type: 3}
   p1spawn: {fileID: 0}
   p2spawn: {fileID: 0}
-  respawnCooldown: 3

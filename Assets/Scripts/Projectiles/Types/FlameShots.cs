@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IProjectable
+public class FlameShots : Projectile
 {
-    void Shoot(Vector3 Direction);
-    void Explode();
+    
 }

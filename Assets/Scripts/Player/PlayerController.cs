@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour
     private float yaw = 0;
     private float pitch = 0;
 
-    public LocalPlayerSpawner PlayerSpawnerInstance;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -304,44 +302,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // If the collision is a projectile...
-        if (collision.gameObject.tag == "Projectile")
+        collisionNormal = collision.GetContact(0).normal;
+
+        if (Mathf.Abs(collisionNormal.x + collisionNormal.z) > Mathf.Abs(collisionNormal.y) && currentMovState == MovementState.jumping) // If the collision is on a mostly vertical surface (a wall)
         {
-            Projectile projScript = collision.gameObject.GetComponent<Projectile>();
-
-            // If the projectile was shot by a player other than this player...
-            if (projScript.playerReference != null && projScript.playerReference != this)
+            // Discern whether to have the player start wall running or wall climbing
+            if (Vector3.Angle(collisionNormal, airVelocity) < 140f)
             {
-                // Hand this PlayerController over to the player spawner
-                this.PlayerSpawnerInstance.SpawnPlayerAfterCooldown(this);
-
-                // Should expand on this once spawners are finished with object pooling and projectile respawning
-                collision.gameObject.SetActive(false);
-
-                // This one is fine, though
-                this.gameObject.SetActive(false);
+                ChangeMovementState(MovementState.wallRunning);
+            }
+            else //if (rb.velocity.y > 0f) 
+            {
+                ChangeMovementState(MovementState.wallClimbing);
             }
         }
-        else
+        else if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
         {
-            collisionNormal = collision.GetContact(0).normal;
-
-            if (Mathf.Abs(collisionNormal.x + collisionNormal.z) > Mathf.Abs(collisionNormal.y) && currentMovState == MovementState.jumping) // If the collision is on a mostly vertical surface (a wall)
-            {
-                // Discern whether to have the player start wall running or wall climbing
-                if (Vector3.Angle(collisionNormal, airVelocity) < 140f)
-                {
-                    ChangeMovementState(MovementState.wallRunning);
-                }
-                else //if (rb.velocity.y > 0f) 
-                {
-                    ChangeMovementState(MovementState.wallClimbing);
-                }
-            }
-            else if (HitboxOnGround)//if (Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider) // In other words, if the collider in question is the ground
-            {
-                ChangeMovementState(MovementState.onGround);
-            }
+            ChangeMovementState(MovementState.onGround);
         }
     }
 
