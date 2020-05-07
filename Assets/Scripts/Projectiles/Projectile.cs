@@ -1,39 +1,108 @@
-﻿using Assets.Scripts.Projectiles;
-using Assets.Scripts.Projectiles.Types;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public enum State
 {
-    public Shot _shot;
-    public Rigidbody rb;
+    HELD,
+    SHOT,
+    PICKEDUP,
+    SPAWNED,
+    BOUNCING
+}
+
+public class Projectile : MonoBehaviour, IProjectable
+{
+    private Transform revertBackToNoParent;
+
+
+    public float _movementSpeed;
+    public float _maxBounces, _currentBounce;
+    public int _damage;
+    public State _state;
+
     public PlayerController playerReference;
 
-    void Start()
+    private Vector3 _direction;
+    public Vector3 Direction
     {
-        if (_shot == null)
+        get { return this._direction; }
+        set
         {
-            _shot = new NormalShots(this);
+            if(this._direction != value)
+            {
+                this._direction = value;
+            }
         }
     }
 
-    void Update()
+    private Vector3 velocity;
+    private Rigidbody rb;
+
+    private void Start()
     {
-        if (_shot != null)
+        _movementSpeed = 20f;
+        rb = GetComponent<Rigidbody>();
+        velocity = this.transform.forward * _movementSpeed;
+        this._maxBounces = 15;
+        this._currentBounce = 0;
+        revertBackToNoParent = this.transform;
+        this._state = State.SPAWNED;
+    }
+
+
+    private void Update()
+    {
+
+        switch (this._state)
         {
-            _shot.Update();
+            //This is will be for when the projectile is floating in a spawn point.
+            case State.SPAWNED:
+                velocity = Vector3.zero;
+                break;
+            //Want this state to be used for when a projectile gets picked up
+            case State.PICKEDUP:
+                break;
+            case State.HELD:
+                Held();
+                break;
+            case State.SHOT:
+                velocity = Direction.normalized * _movementSpeed;
+                this._state = State.BOUNCING;
+                break;
+            case State.BOUNCING:
+                velocity = velocity.normalized * _movementSpeed;
+                Debug.DrawLine(transform.position, rb.velocity, Color.green);
+                Explode();
+
+                break;
         }
+                rb.velocity = velocity;
     }
 
-    void setNormalShots()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        _shot = new NormalShots(this);
+        if(this._state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
+        {
+            Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
+            Vector3 d, n, r;
+
+                d = velocity;
+                n = collision.GetContact(0).normal;
+                r = d - (2 * Vector3.Dot(d, n) * n);
+
+                velocity = r;
+            this._currentBounce++;
+
+        }
+            
     }
 
-    void setExplosiveShots()
+    //PRojectile gets disabled along with its collider. then should be placed into a list of disabled projectiles that can then be enabled and put to a spawn location on the map
+    public void Explode()
     {
-        if (this._shot._currentBounce >= this._shot._maxBounces)
+        if (this._currentBounce >= _maxBounces)
         {
             this.gameObject.SetActive(false);
             this.GetComponent<SphereCollider>().enabled = false;
@@ -53,22 +122,35 @@ public class Projectile : MonoBehaviour
 
 
         this.transform.parent = targetTransform.transform;
-
-        // Assign player reference when picked up, used to determine which player this should hurt when shot
-        this.playerReference = targetTransform.transform.root.GetComponent<PlayerController>();
         
         this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
 
-        this._shot._state = State.HELD; 
+        this._state = State.HELD; 
     }
 
-    void setScatterShots()
+    private void PickingUp()
     {
-        _shot = new ScatterShots(this);
+        PickingUp(playerReference.transform);
     }
 
-    public virtual void OnCollisionEnter(Collision collision)
+    //Shoot needs the direction of where it needs to fire from
+    public virtual void Shoot(Vector3 Direction)
     {
-        _shot.OnCollisionEnter(collision);
+        if(this.rb.isKinematic == true && this.rb.detectCollisions == false)
+        {
+            this.rb.isKinematic = false;
+            this.rb.detectCollisions = true;
+            this.transform.parent = null;
+        }
+
+        this.Direction = Direction;
+        this._state = State.SHOT;
+
     }
+    
+    private void Shoot()
+    {
+        Shoot(this.transform.forward);
+    }
+
 }
