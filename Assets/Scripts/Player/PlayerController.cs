@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private float currentJumpRefreshTime;
     private float jumpRefreshTimer = 0.5f;
 
-    private float wallRunVerticalStart = 5f; // The starting value for the following variable
+    private float wallRunVerticalStart = 3f; // The starting value for the following variable
     private Vector3 wallRunVerticalModifier; // The vertical modifier for wall running, allowing for an arc-like wall-run
 
     private float currentWallClimbTime;
