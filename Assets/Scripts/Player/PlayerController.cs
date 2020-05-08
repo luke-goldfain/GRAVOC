@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
 
     private controlScheme currentControls;
 
-    private Rigidbody rb;
+    [HideInInspector]
+    public Rigidbody rb { get; private set; }
 
     private float vAxis, hAxis;
 

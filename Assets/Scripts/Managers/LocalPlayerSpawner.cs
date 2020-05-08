@@ -100,21 +100,25 @@ public class LocalPlayerSpawner : MonoBehaviour
                 {
                     case 1:
                         p1go.SetActive(true);
-                        p1go.transform.position = p1spawn.position;
-                        p1go.transform.rotation = p1spawn.rotation;
-                        p1pc.AssignRotation(p1spawn.eulerAngles);
-                        p1pc.ChangeMovementState(PlayerController.MovementState.jumping);
-                        p1pc.HitboxOnGround = false;
                         break;
                     case 2:
                         p2go.SetActive(true);
-                        p2go.transform.position = p2spawn.position;
-                        p2go.transform.rotation = p2spawn.rotation;
-                        p2pc.AssignRotation(p2spawn.eulerAngles);
-                        p2pc.ChangeMovementState(PlayerController.MovementState.jumping);
-                        p2pc.HitboxOnGround = false;
                         break;
                 }
+                
+                p1go.transform.position = p1spawn.position;
+                p1go.transform.rotation = p1spawn.rotation;
+                p1pc.AssignRotation(p1spawn.eulerAngles);
+                p1pc.rb.velocity = Vector3.zero;
+                p1pc.ChangeMovementState(PlayerController.MovementState.jumping);
+                p1pc.HitboxOnGround = false;
+
+                p2go.transform.position = p2spawn.position;
+                p2go.transform.rotation = p2spawn.rotation;
+                p2pc.AssignRotation(p2spawn.eulerAngles);
+                p2pc.rb.velocity = Vector3.zero;
+                p2pc.ChangeMovementState(PlayerController.MovementState.jumping);
+                p2pc.HitboxOnGround = false;
             }
         }
 
