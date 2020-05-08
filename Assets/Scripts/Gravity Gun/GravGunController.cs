@@ -5,6 +5,9 @@ using UnityEngine;
 public class GravGunController : MonoBehaviour
 {
     [SerializeField]
+    private PlayerController pc;
+
+    [SerializeField]
     private GameObject gravityPulsePrefab;
     
     private Projectile currentProjectile;
@@ -28,11 +31,18 @@ public class GravGunController : MonoBehaviour
 
     private Transform shotHoldTransform;
 
+    private int pNum;
+
+    private bool firePressed;
+    private float fireAxisPrevFrame;
+
     // Start is called before the first frame update
     void Start()
     {
         // subject to change - set the transform to hold shots as this transform
         shotHoldTransform = this.transform;
+
+        pNum = pc.PlayerNumber;
     }
 
     // Update is called once per frame
@@ -40,11 +50,20 @@ public class GravGunController : MonoBehaviour
     {
         if (pulseTimer > 0f) pulseTimer -= Time.deltaTime;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("P" + pNum + "Fire1") || (fireAxisPrevFrame == 0f && Input.GetAxis("P" + pNum + "Fire1") != 0))
+        {
+            firePressed = true;
+        }
+        else
+        {
+            firePressed = false;
+        }
+
+        if (firePressed)
         {
             if (currentProjectile != null)
             {
-                currentProjectile.Shoot(this.transform.forward);
+                currentProjectile._shot.Shoot(this.transform.forward);
 
                 currentProjectile = null;
             }
@@ -58,6 +77,8 @@ public class GravGunController : MonoBehaviour
         {
             UpdateCheckRemoveCurrentPulseDistance();
         }
+
+        fireAxisPrevFrame = Input.GetAxis("P" + pNum + "Fire1");
     }
 
     private void UpdateSpawnPulseOnFire()
@@ -80,7 +101,7 @@ public class GravGunController : MonoBehaviour
         // TODO: Object pool these
         currentPulse = Instantiate(gravityPulsePrefab, shotHoldTransform.position, shotHoldTransform.rotation);
 
-        currentPulseCollisionScript = currentPulse.GetComponentInChildren<ProjectileCollideNotifyGun>();
+        currentPulseCollisionScript = currentPulse.GetComponentInChildren<ProjectileCollideNotifyGun>(); // TODO: Object Pool
         currentPulseCollisionScript.GravGun = this;
 
         currentPulseHitbox = currentPulseCollisionScript.gameObject;
@@ -109,11 +130,15 @@ public class GravGunController : MonoBehaviour
 
     public void GrabProjectile(Projectile proj)
     {
-        if (proj._state == State.SPAWNED)
+        if (proj._shot._state == Assets.Scripts.Projectiles.State.SPAWNED)
         {
             currentProjectile = proj;
 
             currentProjectile.PickingUp(this.transform);
         }
+
+        //currentProjectile = proj;
+
+        //currentProjectile._shot.PickingUp(this.transform);
     }
 }
