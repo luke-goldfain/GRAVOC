@@ -134,7 +134,7 @@ public class GravGunController : MonoBehaviour
         {
             currentProjectile = proj;
 
-            currentProjectile._shot.PickingUp(this.transform);
+            currentProjectile.PickingUp(this.transform);
         }
 
         //currentProjectile = proj;

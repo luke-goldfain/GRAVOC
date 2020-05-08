@@ -45,6 +45,6 @@ public class ScoreManager
 
     public void IncrementScore(int playerNumber)
     { 
-        Scores[playerNumber]++;
+        Scores[playerNumber - 1]++;
     }
 }

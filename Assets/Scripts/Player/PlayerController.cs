@@ -67,7 +67,10 @@ public class PlayerController : MonoBehaviour
     private float yaw = 0;
     private float pitch = 0;
 
+    [HideInInspector]
     public LocalPlayerSpawner PlayerSpawnerInstance;
+
+    private ScoreManager scoreMgr;
 
     // Start is called before the first frame update
     void Start()
@@ -78,6 +81,8 @@ public class PlayerController : MonoBehaviour
         prevMovState = currentMovState;
 
         currentControls = controlScheme.cont;
+
+        scoreMgr = ScoreManager.Instance;
 
         HitboxOnGround = false;
     }
@@ -314,6 +319,9 @@ public class PlayerController : MonoBehaviour
             {
                 // Hand this PlayerController over to the player spawner
                 this.PlayerSpawnerInstance.SpawnPlayerAfterCooldown(this);
+
+                // Tell the score manager to give a point to the player that shot the projectile
+                scoreMgr.IncrementScore(projScript.playerReference.PlayerNumber);
 
                 // Should expand on this once spawners are finished with object pooling and projectile respawning
                 collision.gameObject.SetActive(false);
