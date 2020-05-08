@@ -13,7 +13,8 @@ namespace Assets.Scripts.Projectiles
         SHOT,
         PICKEDUP,
         SPAWNED,
-        BOUNCING
+        BOUNCING,
+        DONE
     }
 
     public abstract class Shot : ScriptableObject, IProjectable
@@ -36,5 +37,6 @@ namespace Assets.Scripts.Projectiles
         public abstract void Shoot(Vector3 Direction);
         public abstract void Shoot();
 
+        //public abstract void SetUpShot();
     }
 }

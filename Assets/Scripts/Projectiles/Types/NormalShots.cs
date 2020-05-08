@@ -24,6 +24,7 @@ namespace Assets.Scripts.Projectiles.Types
             throw new NotImplementedException();
         }
 
+
         public override void Update()
         {
             
