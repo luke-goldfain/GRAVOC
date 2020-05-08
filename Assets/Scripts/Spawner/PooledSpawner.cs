@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PooledSpawner : Spawner
 {
+    [SerializeField]
+    protected string objectName;
     protected override GameObject getSpawnObject()
     {
-        GameObject spawn = ObjectPoolingManager.Instance.Getobject("Projectile_Prototype");
+        GameObject spawn = ObjectPoolingManager.Instance.Getobject(objectName);
         if(spawn != null)
         {
             spawn.SetActive(true);

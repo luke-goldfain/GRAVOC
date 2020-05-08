@@ -9,6 +9,27 @@ public class ContinuousTimeProjectileSpawner : TimedSpawner
         base.addDeadProjectilesToRemoveList();
         base.removeObjectInListToRemove();
 
+
+        ContinuousSpawn();
+        //if (this.transform.childCount == 0)
+        //{
+        //    lastSpawnTime += Time.deltaTime;
+        //    if (lastSpawnTime > SpawnTime)
+        //    {
+        //        lastSpawnTime = 0.0f;
+        //        this.Spawn();
+        //    }
+        //}
+        //lastSpawnTime += Time.deltaTime;
+        //if (lastSpawnTime > SpawnTime)
+        //{
+        //    lastSpawnTime = 0.0f;
+        //    this.Spawn();
+        //}
+    }
+
+    protected virtual void ContinuousSpawn()
+    {
         if (this.transform.childCount == 0)
         {
             lastSpawnTime += Time.deltaTime;
@@ -18,11 +39,5 @@ public class ContinuousTimeProjectileSpawner : TimedSpawner
                 this.Spawn();
             }
         }
-        //lastSpawnTime += Time.deltaTime;
-        //if (lastSpawnTime > SpawnTime)
-        //{
-        //    lastSpawnTime = 0.0f;
-        //    this.Spawn();
-        //}
     }
 }
