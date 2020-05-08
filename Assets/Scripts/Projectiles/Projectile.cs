@@ -12,7 +12,7 @@ public enum State
     DONE
 }
 
-public class Projectile : MonoBehaviour, IProjectable
+public abstract class Projectile : MonoBehaviour, IProjectable
 {
     private Transform revertBackToNoParent;
 
@@ -47,8 +47,8 @@ public class Projectile : MonoBehaviour, IProjectable
         this.GetComponent<SphereCollider>().enabled = true;
     }
 
-    private Vector3 velocity;
-    private Rigidbody rb;
+    protected Vector3 velocity;
+    protected Rigidbody rb;
 
     private void Start()
     {
@@ -91,7 +91,7 @@ public class Projectile : MonoBehaviour, IProjectable
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    public virtual void OnCollisionEnter(Collision collision)
     {
         if(this._state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
         {
