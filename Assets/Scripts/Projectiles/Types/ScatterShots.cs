@@ -26,7 +26,6 @@ namespace Assets.Scripts.Projectiles.Types
 
         public override void Update()
         {
-
             switch (_state)
             {
                 //This is will be for when the projectile is floating in a spawn point.

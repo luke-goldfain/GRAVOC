@@ -22,7 +22,6 @@ public class ExplosiveShots : Shot
 
     public override void Update()
     {
-
         switch (_state)
         {
             //This is will be for when the projectile is floating in a spawn point.
@@ -82,7 +81,6 @@ public class ExplosiveShots : Shot
         projectile.rb.isKinematic = true;
         projectile.rb.detectCollisions = false;
 
-
         projectile.transform.parent = targetTransform.transform;
 
         projectile.transform.position = Vector3.Lerp(projectile.transform.position, targetTransform.transform.position, 0.2f);
@@ -113,5 +111,4 @@ public class ExplosiveShots : Shot
     {
         Shoot(projectile.transform.forward);
     }
-
 }

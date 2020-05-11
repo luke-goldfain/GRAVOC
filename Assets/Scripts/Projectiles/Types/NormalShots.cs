@@ -26,7 +26,6 @@ namespace Assets.Scripts.Projectiles.Types
 
         public override void Update()
         {
-            
             switch (_state)
             {
                 //This is will be for when the projectile is floating in a spawn point.
@@ -84,10 +83,6 @@ namespace Assets.Scripts.Projectiles.Types
 
                 velocity = r;
                 this._currentBounce++;
-
-                Debug.Log(projectile.name);
-                Debug.Log(_state);
-
             }
         }
 
@@ -96,7 +91,6 @@ namespace Assets.Scripts.Projectiles.Types
         {
             projectile.rb.isKinematic = true;
             projectile.rb.detectCollisions = false;
-
 
             projectile.transform.parent = targetTransform.transform;
 
