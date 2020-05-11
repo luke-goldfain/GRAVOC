@@ -17,8 +17,7 @@ public class Projectile : MonoBehaviour
     {
         if (_shot == null)
         {
-            _shot = new ExplosiveShots(this);
-            //randomProjectile();
+            randomProjectile();
         }
 
         playerReference = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
