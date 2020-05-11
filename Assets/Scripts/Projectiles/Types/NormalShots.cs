@@ -78,10 +78,7 @@ namespace Assets.Scripts.Projectiles.Types
                 d = velocity;
                 n = collision.GetContact(0).normal;
 
-                if (InvertDirectionProjectile == null)
-                {
-                    InvertDirectionProjectile = 1;
-                }
+                if (InvertDirectionProjectile == null) InvertDirectionProjectile = 1;
 
                 r = InvertDirectionProjectile * d - (2 * Vector3.Dot(d, n) * n);
 

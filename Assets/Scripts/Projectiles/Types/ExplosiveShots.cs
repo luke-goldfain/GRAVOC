@@ -11,7 +11,7 @@ public class ExplosiveShots : Shot
         projectile = p;
         _movementSpeed = 20f;
         velocity = p.transform.forward * _movementSpeed;
-        _maxBounces = 15;
+        _maxBounces = 1;
         _currentBounce = 0;
         _state = State.SPAWNED;
     }
@@ -66,18 +66,13 @@ public class ExplosiveShots : Shot
 
     public override void OnCollisionEnter(Collision collision)
     {
-        if (_state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
+        if (_state == State.BOUNCING && collision.transform.tag != "Projectile" || collision.transform.tag == "Player")
         {
-            Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
-            Vector3 d, n, r;
+            projectile.GetComponent<SphereCollider>().radius = 5f;
 
-            d = velocity;
-            n = collision.GetContact(0).normal;
-            r = d - (3 * Vector3.Dot(d, n) * n);
+            ParticleSystem explosion = Instantiate(projectile.Explosion, projectile.transform.position, Quaternion.identity) as ParticleSystem;
 
-            velocity = r;
-            _currentBounce++;
-
+            Destroy(this.projectile.gameObject);
         }
     }
 

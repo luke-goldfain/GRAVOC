@@ -11,12 +11,13 @@ public class Projectile : MonoBehaviour
     public Rigidbody rb;
     public PlayerController playerReference;
     public GameObject prefabProjectile;
+    public ParticleSystem Explosion;
 
     void Start()
     {
         if (_shot == null)
         {
-            _shot = new ScatterShots(this);
+            _shot = new ExplosiveShots(this);
             //randomProjectile();
         }
 

@@ -126,3 +126,5 @@ MonoBehaviour:
   rb: {fileID: 1008630052030559927}
   playerReference: {fileID: 0}
   prefabProjectile: {fileID: 1008630052030559925}
+  Explosion: {fileID: 3951982838636359212, guid: 17b6bb7528a0f5e47a08dc068a1b86f9,
+    type: 3}
