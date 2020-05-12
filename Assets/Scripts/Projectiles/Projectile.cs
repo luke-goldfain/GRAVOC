@@ -79,6 +79,10 @@ public abstract class Projectile : MonoBehaviour, IProjectable
             case State.SHOT:
                 velocity = Direction.normalized * _movementSpeed;
                 this._state = State.BOUNCING;
+                if(this.transform.parent != null)
+                {
+                    this.transform.parent = null;
+                }
                 break;
             case State.BOUNCING:
                 velocity = velocity.normalized * _movementSpeed;
@@ -101,10 +105,10 @@ public abstract class Projectile : MonoBehaviour, IProjectable
                 d = velocity;
                 n = collision.GetContact(0).normal;
                 r = d - (2 * Vector3.Dot(d, n) * n);
-
+             
                 velocity = r;
             this._currentBounce++;
-
+            Debug.Log(this.gameObject.name);
         }
             
     }

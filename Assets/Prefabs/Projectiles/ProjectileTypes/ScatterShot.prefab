@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8962538737888445751}
   - component: {fileID: 8135907305118034201}
   - component: {fileID: 8135907305118034200}
+  - component: {fileID: -6166663799502061344}
   m_Layer: 0
   m_Name: ScatterShot
   m_TagString: Projectile
@@ -122,9 +123,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b94c407efdcfac43a3a80b91abf8f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 60
+  _movementSpeed: 20
   _maxBounces: 9
   _currentBounce: 0
   _damage: 0
   _state: 0
   playerReference: {fileID: 0}
+--- !u!114 &-6166663799502061344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962538737888445748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746c2edf817302642a3f114e9ff53042, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnObject: {fileID: 5683847469545798892, guid: 1ff2813b43f664540857d7bb5ad1244c,
+    type: 3}
+  Enabled: 1
+  objectName: SubScatterShot
+  Projectile: {fileID: 0}
