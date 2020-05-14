@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1008630052030559929}
   - component: {fileID: 1008630052030559928}
   - component: {fileID: 1008630052030559927}
-  - component: {fileID: 443841591}
+  - component: {fileID: 1008630052030559926}
   m_Layer: 0
   m_Name: Projectile_Prototype
   m_TagString: Projectile
@@ -110,7 +110,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &443841591
+--- !u!114 &1008630052030559926
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,15 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shot: {fileID: 0}
   rb: {fileID: 1008630052030559927}
-<<<<<<< HEAD:Assets/Prefabs/Projectiles/Projectile.prefab
-=======
   _movementSpeed: 24
   _maxBounces: 6
   _currentBounce: 0
   _damage: 1
   _state: 1
->>>>>>> origin/master:Assets/Prefabs/Projectiles/Projectile_Prototype.prefab
   playerReference: {fileID: 0}
-  prefabProjectile: {fileID: 1008630052030559925}
-  Explosion: {fileID: 3951982838636359212, guid: 17b6bb7528a0f5e47a08dc068a1b86f9,
-    type: 3}

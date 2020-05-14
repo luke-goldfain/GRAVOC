@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Projectiles;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -131,15 +130,11 @@ public class GravGunController : MonoBehaviour
 
     public void GrabProjectile(Projectile proj)
     {
-<<<<<<< HEAD
-        if (proj._shot._state == State.SPAWNED)
-=======
         if (proj._shot._state == Assets.Scripts.Projectiles.State.SPAWNED)
->>>>>>> origin/master
         {
             currentProjectile = proj;
 
-            currentProjectile._shot.PickingUp(this.transform);
+            currentProjectile.PickingUp(this.transform);
         }
 
         //currentProjectile = proj;
