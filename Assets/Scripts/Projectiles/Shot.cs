@@ -24,7 +24,8 @@ namespace Assets.Scripts.Projectiles
         public float _movementSpeed;
         public float _maxBounces, _currentBounce;
         public int _damage;
-        public int InvertDirectionProjectile;
+        public bool isInstantiatedByScatterShots;
+        public int chosenAngle;
         public State _state;
 
         public abstract void Start();
@@ -36,6 +37,5 @@ namespace Assets.Scripts.Projectiles
         public abstract void PickingUp();
         public abstract void Shoot(Vector3 Direction);
         public abstract void Shoot();
-
     }
 }

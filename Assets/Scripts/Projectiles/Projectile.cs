@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         if (_shot == null)
-        {
+        {   
             randomProjectile();
         }
 
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour
 
     private void randomProjectile()
     {
-        int randomInt = UnityEngine.Random.Range(0, 3);
+        int randomInt = UnityEngine.Random.Range(0, 4);
 
         if (randomInt == 0)
         {
@@ -42,6 +42,10 @@ public class Projectile : MonoBehaviour
         else if (randomInt == 1)
         {
             setExplosiveShots();
+        }
+        else if (randomInt == 2)
+        {
+            setPrecisionShots();
         }
         else
         {
@@ -57,6 +61,11 @@ public class Projectile : MonoBehaviour
     public void setScatterShots()
     {
         _shot = new ScatterShots(this);
+    }
+
+    public void setPrecisionShots()
+    {
+        _shot = new PrecisionShots(this);
     }
 
     public void setExplosiveShots()

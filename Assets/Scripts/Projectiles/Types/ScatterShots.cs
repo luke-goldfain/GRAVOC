@@ -91,12 +91,14 @@ namespace Assets.Scripts.Projectiles.Types
                 GameObject newProjectile = Instantiate(projectile.prefabProjectile, projectile.transform.position, Quaternion.identity) as GameObject;
                 newProjectile.GetComponent<Projectile>().setNormalShots();
                 newProjectile.GetComponent<Projectile>()._shot._state = State.BOUNCING;
-                newProjectile.GetComponent<Projectile>()._shot.InvertDirectionProjectile = -10;
-                
+                newProjectile.GetComponent<Projectile>()._shot.isInstantiatedByScatterShots = true;
+                newProjectile.GetComponent<Projectile>()._shot.chosenAngle = 20;
+
                 GameObject newProjectile2 = Instantiate(projectile.prefabProjectile, projectile.transform.position, Quaternion.identity) as GameObject;
                 newProjectile2.GetComponent<Projectile>().setNormalShots();
                 newProjectile2.GetComponent<Projectile>()._shot._state = State.BOUNCING;
-                newProjectile2.GetComponent<Projectile>()._shot.InvertDirectionProjectile = 10;
+                newProjectile2.GetComponent<Projectile>()._shot.isInstantiatedByScatterShots = true;
+                newProjectile2.GetComponent<Projectile>()._shot.chosenAngle = -20;
 
                 _maxBounces--;
             }
