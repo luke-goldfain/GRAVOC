@@ -14,11 +14,16 @@ namespace Assets.Scripts.Projectiles.Types
             projectile = p;
             _movementSpeed = 20f;
             velocity = p.transform.forward * _movementSpeed;
+<<<<<<< HEAD
             _maxBounces = 3;
+=======
+            _maxBounces = 15;
+>>>>>>> origin/master
             _currentBounce = 0;
             _state = State.SPAWNED;
         }
 
+<<<<<<< HEAD
         public override void Start()
         {
             throw new NotImplementedException();
@@ -60,15 +65,25 @@ namespace Assets.Scripts.Projectiles.Types
                 projectile.gameObject.SetActive(false);
                 projectile.GetComponent<SphereCollider>().enabled = false;
             }
+=======
+        public override void Explode()
+        {
+            throw new NotImplementedException();
+>>>>>>> origin/master
         }
 
         public override void Held()
         {
+<<<<<<< HEAD
             projectile.transform.position = Vector3.Lerp(projectile.transform.position, projectile.transform.parent.transform.position, 0.2f);
+=======
+            throw new NotImplementedException();
+>>>>>>> origin/master
         }
 
         public override void OnCollisionEnter(Collision collision)
         {
+<<<<<<< HEAD
             if (_state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
             {
                 Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
@@ -139,6 +154,39 @@ namespace Assets.Scripts.Projectiles.Types
         public override void Shoot()
         {
             Shoot(projectile.transform.forward);
+=======
+            throw new NotImplementedException();
+        }
+
+        public override void PickingUp(Transform targetTransform)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void PickingUp()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Shoot(Vector3 Direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Shoot()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update()
+        {
+            throw new NotImplementedException();
+>>>>>>> origin/master
         }
     }
 }

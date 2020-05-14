@@ -131,11 +131,19 @@ public class GravGunController : MonoBehaviour
 
     public void GrabProjectile(Projectile proj)
     {
+<<<<<<< HEAD
         if (proj._shot._state == State.SPAWNED)
+=======
+        if (proj._shot._state == Assets.Scripts.Projectiles.State.SPAWNED)
+>>>>>>> origin/master
         {
             currentProjectile = proj;
 
             currentProjectile._shot.PickingUp(this.transform);
         }
+
+        //currentProjectile = proj;
+
+        //currentProjectile._shot.PickingUp(this.transform);
     }
 }

@@ -1,5 +1,8 @@
 ﻿using Assets.Scripts.Projectiles;
+<<<<<<< HEAD
 using System;
+=======
+>>>>>>> origin/master
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +14,26 @@ public class ExplosiveShots : Shot
         projectile = p;
         _movementSpeed = 20f;
         velocity = p.transform.forward * _movementSpeed;
+<<<<<<< HEAD
         _maxBounces = 3;
+=======
+        _maxBounces = 15;
+>>>>>>> origin/master
         _currentBounce = 0;
         _state = State.SPAWNED;
     }
     public override void Start()
     {
+<<<<<<< HEAD
         throw new NotImplementedException();
+=======
+        throw new System.NotImplementedException();
+>>>>>>> origin/master
     }
 
     public override void Update()
     {
+<<<<<<< HEAD
         switch (_state)
         {
             //This is will be for when the projectile is floating in a spawn point.
@@ -56,15 +68,29 @@ public class ExplosiveShots : Shot
             projectile.gameObject.SetActive(false);
             projectile.GetComponent<SphereCollider>().enabled = false;
         }
+=======
+        throw new System.NotImplementedException();
+    }
+
+
+    public override void Explode()
+    {
+        throw new System.NotImplementedException();
+>>>>>>> origin/master
     }
 
     public override void Held()
     {
+<<<<<<< HEAD
         projectile.transform.position = Vector3.Lerp(projectile.transform.position, projectile.transform.parent.transform.position, 0.2f);
+=======
+        throw new System.NotImplementedException();
+>>>>>>> origin/master
     }
 
     public override void OnCollisionEnter(Collision collision)
     {
+<<<<<<< HEAD
         if (_state == State.BOUNCING && collision.transform.tag != "Projectile" || collision.transform.tag != "Player")
         {
             ParticleSystem explosion = Instantiate(projectile.Explosion, projectile.transform.position, Quaternion.identity) as ParticleSystem;
@@ -92,10 +118,19 @@ public class ExplosiveShots : Shot
         projectile.transform.position = Vector3.Lerp(projectile.transform.position, targetTransform.transform.position, 0.2f);
 
         _state = State.HELD;
+=======
+        throw new System.NotImplementedException();
+    }
+
+    public override void PickingUp(Transform targetTransform)
+    {
+        throw new System.NotImplementedException();
+>>>>>>> origin/master
     }
 
     public override void PickingUp()
     {
+<<<<<<< HEAD
         PickingUp(projectile.playerReference.transform);
     }
 
@@ -111,10 +146,25 @@ public class ExplosiveShots : Shot
 
         Direction = d;
         _state = State.SHOT;
+=======
+        throw new System.NotImplementedException();
+    }
+
+    public override void Shoot(Vector3 Direction)
+    {
+        throw new System.NotImplementedException();
+>>>>>>> origin/master
     }
 
     public override void Shoot()
     {
+<<<<<<< HEAD
         Shoot(projectile.transform.forward);
     }
+=======
+        throw new System.NotImplementedException();
+    }
+
+   
+>>>>>>> origin/master
 }
