@@ -14,7 +14,7 @@ public class ProjectileSpawner : PooledSpawner
         {
             Projectile proj = go.GetComponent<Projectile>();
             proj.gameObject.transform.position = this.transform.position + new Vector3(0, this.transform.lossyScale.y, 0);
-            //proj.GetComponent<Shot>();
+            
         }
     }
 
@@ -33,7 +33,7 @@ public class ProjectileSpawner : PooledSpawner
             proj = go.GetComponent<Projectile>();
             if (go.GetComponent<Projectile>() != null)
             {
-                if (proj.GetComponent<Shot>()._state == State.DONE)
+                if (proj._shot._state == State.DONE)
                 {
                     //remove done projectiles
                     this.objectsToRemove.Add(proj.gameObject);

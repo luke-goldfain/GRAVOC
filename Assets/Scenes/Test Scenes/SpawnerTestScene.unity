@@ -705,7 +705,7 @@ MonoBehaviour:
   Enabled: 1
   objectName: Projectile_Prototype
   Projectile: {fileID: 0}
-  SpawnTime: 0
+  SpawnTime: 2
 --- !u!65 &1976607380
 BoxCollider:
   m_ObjectHideFlags: 0
