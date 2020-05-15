@@ -13,7 +13,7 @@ public class ProjectileSpawner : PooledSpawner
         {
             Projectile proj = go.GetComponent<Projectile>();
             proj.gameObject.transform.position = this.transform.position + new Vector3(0, this.transform.lossyScale.y, 0);
-            proj.SetUpProjectile();
+            //proj.SetUpProjectile();
         }
     }
 
@@ -23,8 +23,8 @@ public class ProjectileSpawner : PooledSpawner
         if (go.GetComponent<Projectile>() != null)
         {
             Projectile gs = go.GetComponent<Projectile>();
-            gs.gameObject.transform.position = caster.transform.position;
-            gs.SetUpWeapon(caster);
+            gs.gameObject.transform.position = caster.transform.position + new Vector3(0, caster.transform.lossyScale.y, 0);
+            //gs.SetUpWeapon(caster);
 
         }
     }

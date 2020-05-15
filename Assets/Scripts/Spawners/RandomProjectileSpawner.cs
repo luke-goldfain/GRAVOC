@@ -39,7 +39,7 @@ public class RandomProjectileSpawner : MonoBehaviour
                     Debug.Log("Normal");
                     if (this.GetComponent<NormalShotSpawner>())
                     {
-                        this.GetComponent<NormalShotSpawner>().Spawn();
+                        this.GetComponent<NormalShotSpawner>().Spawn(this.gameObject);
                     }
                     else
                     {
@@ -51,7 +51,7 @@ public class RandomProjectileSpawner : MonoBehaviour
                     Debug.Log("Precision");
                     if (this.GetComponent<PrecisionShotSpawner>())
                     {
-                        this.GetComponent<PrecisionShotSpawner>().Spawn();
+                        this.GetComponent<PrecisionShotSpawner>().Spawn(this.gameObject);
                     }
 
                     else
@@ -64,7 +64,7 @@ public class RandomProjectileSpawner : MonoBehaviour
                     Debug.Log("ExplosiveShot");
                     if (this.GetComponent<ExplosiveShotSpawner>())
                     {
-                        this.GetComponent<ExplosiveShotSpawner>().Spawn();
+                        this.GetComponent<ExplosiveShotSpawner>().Spawn(this.gameObject);
                     }
                     else
                     {
@@ -76,7 +76,7 @@ public class RandomProjectileSpawner : MonoBehaviour
                     Debug.Log("ScatterShot");
                     if (this.GetComponent<ScatterShotSpawner>())
                     {
-                        this.GetComponent<ScatterShotSpawner>().Spawn();
+                        this.GetComponent<ScatterShotSpawner>().Spawn(this.gameObject);
                     }
                     else
                     {
@@ -88,7 +88,7 @@ public class RandomProjectileSpawner : MonoBehaviour
                     Debug.Log("NormalShot");
                     if (this.GetComponent<NormalShotSpawner>())
                     {
-                        this.GetComponent<NormalShotSpawner>().Spawn();
+                        this.GetComponent<NormalShotSpawner>().Spawn(this.gameObject);
                     }
                     else
                     {

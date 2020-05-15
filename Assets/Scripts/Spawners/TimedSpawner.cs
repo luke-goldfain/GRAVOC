@@ -17,7 +17,7 @@ public class TimedSpawner : ProjectileSpawner
         lastSpawnTime += Time.deltaTime;
         if ((lastSpawnTime > SpawnTime) && (spawned == false))
         {
-            this.Spawn();
+            this.Spawn(this.gameObject);
             this.spawned = true;
             this.lastSpawnTime = 0f;
         }

@@ -90,6 +90,6 @@ public class Spawner : MonoBehaviour, ISpawner
 
     public virtual void SetupSpawnObject(GameObject go, GameObject caster)
     {
-        go.transform.position = caster.transform.position;
+        //go.transform.position = caster.transform.position;
     }
 }
