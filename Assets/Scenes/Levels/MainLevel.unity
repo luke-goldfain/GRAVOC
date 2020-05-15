@@ -387,6 +387,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: NormalShotPercentage
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: ExplosiveShotPercentage
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: ScatterShotPercentage
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: PrecisionShotPercentage
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 5496027189744451930, guid: 23bfe2c13d89ef2419d4b130cce7e224,
         type: 3}
       propertyPath: m_StaticEditorFlags

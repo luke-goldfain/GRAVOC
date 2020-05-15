@@ -370,6 +370,8 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Explosion")
         {
             this.rb.AddForce((Vector3.Normalize(this.transform.position - other.transform.position) + Vector3.up) * 400f);
+
+            ChangeMovementState(MovementState.jumping);
         }
     }
 
