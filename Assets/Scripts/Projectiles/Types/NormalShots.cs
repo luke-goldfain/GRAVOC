@@ -17,6 +17,7 @@ namespace Assets.Scripts.Projectiles.Types
             _maxBounces = 15;
             _currentBounce = 0;
             _state = State.SPAWNED;
+            isInstantiatedByScatterShots = false;
         }
 
         public override void Start()
@@ -26,7 +27,6 @@ namespace Assets.Scripts.Projectiles.Types
 
         public override void Update()
         {
-            
             switch (_state)
             {
                 //This is will be for when the projectile is floating in a spawn point.
@@ -73,15 +73,19 @@ namespace Assets.Scripts.Projectiles.Types
             if (_state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
             {
                 Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
-                Vector3 d, n, r;
+                Vector3 d, n, r, f;
 
                 d = velocity;
-                n = collision.GetContact(0).normal;
+                n = collision.GetContact(0).normal;   
                 r = d - (2 * Vector3.Dot(d, n) * n);
+
+                if (isInstantiatedByScatterShots)
+                {
+                    r = Quaternion.AngleAxis(chosenAngle, Vector3.up) * r;
+                }               
 
                 velocity = r;
                 this._currentBounce++;
-
             }
         }
 
@@ -90,7 +94,6 @@ namespace Assets.Scripts.Projectiles.Types
         {
             projectile.rb.isKinematic = true;
             projectile.rb.detectCollisions = false;
-
 
             projectile.transform.parent = targetTransform.transform;
 
@@ -121,6 +124,6 @@ namespace Assets.Scripts.Projectiles.Types
         public override void Shoot()
         {
             Shoot(projectile.transform.forward);
-        }
+        } 
     }
 }
