@@ -132,36 +132,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scoreboard Panel
       objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p1color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p1color.b
-      value: 0.07898474
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p1color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p2color.g
-      value: 0.73333335
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p2color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824880977460410, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: p2color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2653824880977460411, guid: c90622771c6f97741aeeccfd750c757d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -266,46 +236,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824881563601782, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -50
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824881563601785, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824881563601785, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0.73333335
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824881563601785, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824882034939820, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824882034939820, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824882034939820, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.07898474
-      objectReference: {fileID: 0}
-    - target: {fileID: 2653824882034939821, guid: c90622771c6f97741aeeccfd750c757d,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c90622771c6f97741aeeccfd750c757d, type: 3}

@@ -12,7 +12,10 @@ public class UnityScoreManager : MonoBehaviour
     private int scoreToWin;
 
     [SerializeField]
-    private Text p1scoreText, p2scoreText, winText;
+    private GameObject restartGO;
+
+    [SerializeField]
+    private Text restartText, p1scoreText, p2scoreText, winText;
     
     private Color p1color, p2color;
 
@@ -24,6 +27,8 @@ public class UnityScoreManager : MonoBehaviour
         scoreMgr = ScoreManager.Instance;
 
         scoreMgr.InitScores(2);
+
+        restartText.text = "";
 
         winText.text = "";
         p1color = p1scoreText.color;
@@ -61,12 +66,17 @@ public class UnityScoreManager : MonoBehaviour
                         case 0:
                             winText.text = "Player 1 wins!";
                             winText.color = p1color;
+                            restartText.color = p1color;
                             break;
                         case 1:
                             winText.text = "Player 2 wins!";
                             winText.color = p2color;
+                            restartText.color = p2color;
                             break;
                     }
+
+                    restartGO.SetActive(true);
+                    restartText.text = "Hit Start to return to Menu";
                 }
             }
         }
