@@ -382,6 +382,18 @@ PrefabInstance:
       propertyPath: p2spawn
       value: 
       objectReference: {fileID: 742081610}
+    - target: {fileID: 3327186456305251611, guid: da74c48a419570240a5e9f5765eb176a,
+        type: 3}
+      propertyPath: p2Prefab
+      value: 
+      objectReference: {fileID: 2419863106868385125, guid: bcfe99abab211d042bfaf32b72a710e6,
+        type: 3}
+    - target: {fileID: 3327186456305251611, guid: da74c48a419570240a5e9f5765eb176a,
+        type: 3}
+      propertyPath: p1Prefab
+      value: 
+      objectReference: {fileID: 7697513307943109767, guid: 673d803b38c0c214993a3f5bdaa3422d,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da74c48a419570240a5e9f5765eb176a, type: 3}
 --- !u!1 &1189934971

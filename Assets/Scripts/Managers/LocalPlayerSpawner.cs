@@ -20,7 +20,7 @@ public class PlayerRespawnTimer
 public class LocalPlayerSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject playerPrefab;
+    private GameObject p1Prefab, p2Prefab;
 
     [SerializeField, Tooltip("Place transforms of empty game objects in-scene here to use as the spawn points for each player.")]
     private Transform p1spawn, p2spawn;
@@ -55,8 +55,8 @@ public class LocalPlayerSpawner : MonoBehaviour
 
     private void StartSpawnPlayers()
     {
-        p1go = Instantiate(playerPrefab, p1spawn.position, p1spawn.rotation);
-        p2go = Instantiate(playerPrefab, p2spawn.position, p2spawn.rotation);
+        p1go = Instantiate(p1Prefab, p1spawn.position, p1spawn.rotation);
+        p2go = Instantiate(p2Prefab, p2spawn.position, p2spawn.rotation);
 
         p1pc = p1go.GetComponent<PlayerController>();
         p2pc = p2go.GetComponent<PlayerController>();

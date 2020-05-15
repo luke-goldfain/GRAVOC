@@ -160,9 +160,11 @@ public class PlayerController : MonoBehaviour
         switch (currentMovState)
         {
             case MovementState.onGround:
+                anim.SetBool("InAir", false);
                 hasWallClimbedThisJump = false;
                 break;
             case MovementState.jumping:
+                anim.SetBool("InAir", true);
                 currentJumpRefreshTime = 0f;
                 break;
             case MovementState.wallRunning:
@@ -189,6 +191,13 @@ public class PlayerController : MonoBehaviour
             {
                 rb.velocity = Vector3.Lerp(rb.velocity, Vector3.zero, 0.2f);
             }
+
+
+            // Animation goodness
+            float velX = transform.InverseTransformDirection(rb.velocity).x;
+            float velZ = transform.InverseTransformDirection(rb.velocity).z;
+            anim.SetFloat("VelX", velX / moveSpeed);
+            anim.SetFloat("VelZ", -velZ / moveSpeed);
         }
         else if (HitboxOnGround)
         {
