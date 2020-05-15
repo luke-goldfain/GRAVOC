@@ -4,17 +4,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExplosiveShots : Shot
+public class PrecisionShots : Shot
 {
-    public ExplosiveShots(Projectile p)
+    public PrecisionShots(Projectile p)
     {
         projectile = p;
-        _movementSpeed = 20f;
+        _movementSpeed = 50f;
         velocity = p.transform.forward * _movementSpeed;
-        _maxBounces = 3;
+        _maxBounces = 15;
         _currentBounce = 0;
         _state = State.SPAWNED;
+        projectile.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
+
     public override void Start()
     {
         throw new NotImplementedException();
@@ -65,16 +67,19 @@ public class ExplosiveShots : Shot
 
     public override void OnCollisionEnter(Collision collision)
     {
-        if (_state == State.BOUNCING && collision.transform.tag != "Projectile" || collision.transform.tag != "Player")
+        if (_state == State.BOUNCING && collision.transform.tag != "Projectile" && collision.transform.tag != "Player")
         {
-            ParticleSystem explosion = Instantiate(projectile.Explosion, projectile.transform.position, Quaternion.identity) as ParticleSystem;
-
             Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
-            Vector3 d, n, r;
+            Vector3 d, n, r, f;
 
             d = velocity;
             n = collision.GetContact(0).normal;
             r = d - (2 * Vector3.Dot(d, n) * n);
+
+            if (isInstantiatedByScatterShots)
+            {
+                r = Quaternion.AngleAxis(chosenAngle, Vector3.up) * r;
+            }
 
             velocity = r;
             this._currentBounce++;

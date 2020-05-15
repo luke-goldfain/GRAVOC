@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Projectiles;
 using Assets.Scripts.Projectiles.Types;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,17 @@ public class Projectile : MonoBehaviour
     public Shot _shot;
     public Rigidbody rb;
     public PlayerController playerReference;
+    public GameObject prefabProjectile;
+    public ParticleSystem Explosion;
 
     void Start()
     {
         if (_shot == null)
-        {
-            _shot = new NormalShots(this);
+        {   
+            randomProjectile();
         }
+
+        playerReference = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     void Update()
@@ -26,45 +31,46 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    void setNormalShots()
+    private void randomProjectile()
+    {
+        int randomInt = UnityEngine.Random.Range(0, 4);
+
+        if (randomInt == 0)
+        {
+            setNormalShots();
+        }
+        else if (randomInt == 1)
+        {
+            setExplosiveShots();
+        }
+        else if (randomInt == 2)
+        {
+            setPrecisionShots();
+        }
+        else
+        {
+            setScatterShots();
+        }
+    }
+
+    public void setNormalShots()
     {
         _shot = new NormalShots(this);
     }
 
-    void setExplosiveShots()
-    {
-        if (this._shot._currentBounce >= this._shot._maxBounces)
-        {
-            this.gameObject.SetActive(false);
-            this.GetComponent<SphereCollider>().enabled = false;
-        }
-    }
-
-    public void Held()
-    {
-        this.transform.position = Vector3.Lerp(this.transform.position, this.transform.parent.transform.position, 0.2f);
-    }
-
-    //Here is what will be called when a player has interacted and picked up the projectile
-    public void PickingUp(Transform targetTransform)
-    {
-        this.rb.isKinematic = true;
-        this.rb.detectCollisions = false;
-
-
-        this.transform.parent = targetTransform.transform;
-
-        // Assign player reference when picked up, used to determine which player this should hurt when shot
-        this.playerReference = targetTransform.transform.root.GetComponent<PlayerController>();
-        
-        this.transform.position = Vector3.Lerp(this.transform.position, targetTransform.transform.position, 0.2f);
-
-        this._shot._state = State.HELD; 
-    }
-
-    void setScatterShots()
+    public void setScatterShots()
     {
         _shot = new ScatterShots(this);
+    }
+
+    public void setPrecisionShots()
+    {
+        _shot = new PrecisionShots(this);
+    }
+
+    public void setExplosiveShots()
+    {
+        _shot = new ExplosiveShots(this);
     }
 
     public virtual void OnCollisionEnter(Collision collision)
