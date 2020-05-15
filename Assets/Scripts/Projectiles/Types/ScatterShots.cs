@@ -156,6 +156,9 @@ using UnityEngine;
 
     public class ScatterShots : Projectile
     {
+
+    public int ChosenAngle;
+
     private bool doSpawnScatter;
     public SubScatterShotSpawner subScatter;
     //public int chosenAngle;
@@ -169,17 +172,23 @@ using UnityEngine;
             this.gameObject.SetActive(true);
         this.doSpawnScatter = true;
         }
-        //public ScatterShots(Projectile p)
-        //{
-        //    projectile = p;
-        //    _movementSpeed = 20f;
-        //    velocity = p.transform.forward * _movementSpeed;
-        //    _maxBounces = 3;
-        //    _currentBounce = 0;
-        //    _state = State.SPAWNED;
-        //}
+    //public ScatterShots(Projectile p)
+    //{
+    //    projectile = p;
+    //    _movementSpeed = 20f;
+    //    velocity = p.transform.forward * _movementSpeed;
+    //    _maxBounces = 3;
+    //    _currentBounce = 0;
+    //    _state = State.SPAWNED;
+    //}
 
-        public void Update()
+    public override void SetUpProjectile()
+    {
+        base.SetUpProjectile();
+        this.doSpawnScatter = true;
+    }
+
+    public void Update()
         {
             switch (_state)
             {
@@ -224,7 +233,8 @@ using UnityEngine;
                 n = collision.GetContact(0).normal;
                 r = d - (2 * Vector3.Dot(d, n) * n);
 
-                velocity = r;
+            velocity = r;
+            this._currentBounce++;
             }
         }
 
@@ -232,8 +242,8 @@ using UnityEngine;
         {
             if (this.doSpawnScatter)
             {
-            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, 40);
-            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, -50);
+            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, ChosenAngle);
+            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, -ChosenAngle);
 
             this.doSpawnScatter = false;
             }

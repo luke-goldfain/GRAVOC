@@ -56,12 +56,12 @@ public class ExplosiveShots : Projectile
                 break;
         }
 
-        rb.velocity = velocity;
-
         if (Input.GetKeyDown(KeyCode.G))
         {
-            SceneManager.LoadScene("SpawnerTest");
+            SceneManager.LoadScene("Environment Test");
         }
+
+        rb.velocity = velocity;
     }
 
     //PRojectile gets disabled along with its collider. then should be placed into a list of disabled projectiles that can then be enabled and put to a spawn location on the map
@@ -83,7 +83,7 @@ public class ExplosiveShots : Projectile
     {
         if (_state == State.BOUNCING && collision.transform.tag != "Projectile" || collision.transform.tag != "Player")
         {
-            //ParticleSystem explosion = Instantiate(Explosion, transform.position, Quaternion.identity) as ParticleSystem;
+            ParticleSystem explosion = Instantiate(Explosion, transform.position, Quaternion.identity) as ParticleSystem;
 
             Debug.DrawRay(collision.GetContact(0).point, collision.GetContact(0).normal, Color.red, 10);
             Vector3 d, n, r;

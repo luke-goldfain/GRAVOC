@@ -46,4 +46,4 @@ MonoBehaviour:
   Projectile: {fileID: 2253429855905782832, guid: 0adb9888647e0d64782511c9eba1706d,
     type: 3}
   InitialPoolSize: 1
-  MaxPoolSize: 5
+  MaxPoolSize: 100

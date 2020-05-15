@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8135907305118034201}
   - component: {fileID: -561222362049260272}
   - component: {fileID: -5551601160851084800}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ScatterShot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -124,11 +124,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 30
-  _maxBounces: 1
+  _maxBounces: 4
   _currentBounce: 0
   _damage: 0
   _state: 0
   playerReference: {fileID: 0}
+  ChosenAngle: 20
   subScatter: {fileID: -5551601160851084800}
 --- !u!114 &-5551601160851084800
 MonoBehaviour:

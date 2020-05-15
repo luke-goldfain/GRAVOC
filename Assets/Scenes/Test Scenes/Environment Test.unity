@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: SpawnTime
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2569683536061160087, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: MaxPoolSize
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 2696566159686661210, guid: 23bfe2c13d89ef2419d4b130cce7e224,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -141,6 +146,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.973
+      objectReference: {fileID: 0}
+    - target: {fileID: 3010080265659185020, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: MaxPoolSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3073553389075026275, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4376977126377791856, guid: 23bfe2c13d89ef2419d4b130cce7e224,
         type: 3}
@@ -202,6 +217,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: NormalShotPercentage
+      value: 0.204
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: PrecisionShotPercentage
+      value: 0.709
+      objectReference: {fileID: 0}
+    - target: {fileID: 5081876994033803515, guid: 23bfe2c13d89ef2419d4b130cce7e224,
+        type: 3}
+      propertyPath: ExplosiveShotPercentage
+      value: 0.225
+      objectReference: {fileID: 0}
     - target: {fileID: 5496027189744451910, guid: 23bfe2c13d89ef2419d4b130cce7e224,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -232,7 +262,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.845
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4376977126505175349, guid: 23bfe2c13d89ef2419d4b130cce7e224, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 23bfe2c13d89ef2419d4b130cce7e224, type: 3}
 --- !u!1001 &1318704951
 PrefabInstance:

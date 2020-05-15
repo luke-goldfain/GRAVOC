@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 950907895871818161}
   - component: {fileID: 2040158711606768397}
   - component: {fileID: -5294423436343859055}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PrecisionShot
   m_TagString: Projectile
   m_Icon: {fileID: 0}

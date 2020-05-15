@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4482598953223218860}
   - component: {fileID: 8151258105784862834}
   - component: {fileID: 1431414313968764839}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ExplosiveShot
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -128,4 +128,5 @@ MonoBehaviour:
   _damage: 0
   _state: 0
   playerReference: {fileID: 0}
-  Explosion: {fileID: 0}
+  Explosion: {fileID: 3951982838636359212, guid: 17b6bb7528a0f5e47a08dc068a1b86f9,
+    type: 3}
