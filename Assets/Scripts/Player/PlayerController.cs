@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Tooltip("The sensitivity with which the camera rotates. A good default is 3.")]
     private float lookSensitivity;
 
+    public Animator anim;
+
     public enum MovementState
     {
         onGround, jumping, wallRunning, wallClimbing
