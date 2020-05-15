@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 296434644046818585}
   m_LocalRotation: {x: -0, y: -0.69971323, z: -0, w: 0.71442384}
   m_LocalPosition: {x: 0.186, y: -0.25, z: 0.229}
-  m_LocalScale: {x: 0.006786601, y: 0.0067866, z: 0.006786601}
+  m_LocalScale: {x: 0.006, y: 0.006, z: 0.006}
   m_Children: []
   m_Father: {fileID: 7697513309671449305}
   m_RootOrder: 1
@@ -412,6 +412,7 @@ MonoBehaviour:
   jumpForce: 350
   airInfluence: 1
   lookSensitivity: 3
+  anim: {fileID: 1755671865474590982}
   wallClimbTimer: 1
   HitboxOnGround: 0
   PlayerCamera: {fileID: 7697513309671449304}
@@ -682,11 +683,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: vanguard_Red Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8637222826772412525, guid: ed6ac7f7899c90146890f1c374c4ce45,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 938c6baecfc2c48409a8d3987b712d27, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed6ac7f7899c90146890f1c374c4ce45, type: 3}
 --- !u!4 &8563424833370981500 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1826094919815435543, guid: ed6ac7f7899c90146890f1c374c4ce45,
+    type: 3}
+  m_PrefabInstance: {fileID: 8034687973144957291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1755671865474590982 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8637222826772412525, guid: ed6ac7f7899c90146890f1c374c4ce45,
     type: 3}
   m_PrefabInstance: {fileID: 8034687973144957291}
   m_PrefabAsset: {fileID: 0}

@@ -553,11 +553,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4465776600048109333, guid: 673d803b38c0c214993a3f5bdaa3422d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7697513307943109767, guid: 673d803b38c0c214993a3f5bdaa3422d,
         type: 3}
       propertyPath: m_Name
@@ -686,11 +681,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player_Blue
-      objectReference: {fileID: 0}
-    - target: {fileID: 8556763522474874615, guid: bcfe99abab211d042bfaf32b72a710e6,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcfe99abab211d042bfaf32b72a710e6, type: 3}

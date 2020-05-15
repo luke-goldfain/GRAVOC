@@ -1013,7 +1013,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vanguard_t_choonyung
+  m_Name: Vanguard
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Blend
@@ -1021,7 +1021,7 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2206,7 +2206,7 @@ BlendTree:
   m_MaxThreshold: 0.9
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 2
 --- !u!1102 &8410828275340550817
 AnimatorState:
   serializedVersion: 5
