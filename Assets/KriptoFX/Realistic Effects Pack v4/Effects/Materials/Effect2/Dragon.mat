@@ -115,9 +115,9 @@ Material:
     - _CutoutColor: {r: 1, g: 1, b: 1, a: 1}
     - _DropWavesScale: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FresnelColor: {r: 0.45588237, g: 0.75233257, b: 1, a: 1}
+    - _FresnelColor: {r: 4, g: 0.7529412, b: 0.5333333, a: 1}
     - _HeightUVScrollDistort: {r: 5, g: 1, b: 0, a: 0}
-    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 0.024515213, g: 0.22063692, b: 0.66681385, a: 0.16078432}
     - _NoiseScale: {r: 0.5, g: 0.5, b: 0.1, a: 0.25}
     - _RimColor: {r: 0.13283955, g: 0.15775639, b: 0.19852942, a: 0.678}
     - _Speed: {r: 5, g: 1, b: 0, a: 0}
