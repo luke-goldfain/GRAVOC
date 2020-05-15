@@ -75,7 +75,32 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: 0833819662335c54c9255e12b7c88983,
         type: 3}
       propertyPath: m_Name
-      value: vanguard_Red
+      value: vanguard_Red Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -681215969731513272, guid: 0833819662335c54c9255e12b7c88983,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 7.857771e-14
+      objectReference: {fileID: 0}
+    - target: {fileID: -681215969731513272, guid: 0833819662335c54c9255e12b7c88983,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.11525366
+      objectReference: {fileID: 0}
+    - target: {fileID: -681215969731513272, guid: 0833819662335c54c9255e12b7c88983,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 6.7756965e-13
+      objectReference: {fileID: 0}
+    - target: {fileID: -681215969731513272, guid: 0833819662335c54c9255e12b7c88983,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99333614
+      objectReference: {fileID: 0}
+    - target: {fileID: -681215969731513272, guid: 0833819662335c54c9255e12b7c88983,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -13.237
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0833819662335c54c9255e12b7c88983, type: 3}
