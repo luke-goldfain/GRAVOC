@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ExplosiveShots : Projectile
 {
@@ -56,6 +57,11 @@ public class ExplosiveShots : Projectile
         }
 
         rb.velocity = velocity;
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            SceneManager.LoadScene("SpawnerTest");
+        }
     }
 
     //PRojectile gets disabled along with its collider. then should be placed into a list of disabled projectiles that can then be enabled and put to a spawn location on the map

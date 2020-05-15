@@ -55,10 +55,11 @@ public class ObjectPool
     {
         //instantiate a new list of game objects to store our pooled objects in.
         pooledObjects = new List<GameObject>();
-
+        
         //create and add an object based on initial size.
         for (int i = 0; i < initialPoolSize; i++)
         {
+
             //instantiate and create a game object with useless attributes.
             //these should be reset anyways.
             GameObject go = GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity) as GameObject;
@@ -98,6 +99,16 @@ public class ObjectPool
         //iterate through all pooled objects.
         for (int i = 0; i < pooledObjects.Count; i++)
         {
+            ///Pure HACK need to figure out how to solve this. PROBLEM
+            ///PROBLEM: When a game object that is set to DONotDestroyOnLoad becomes a child of another object, it then can become destroyed. This messes with the PooledObjects
+            ///because pooledObjects thinks it has members but when the scene is reloaded the members are NULL instead of the game object which should have not been destroyed
+            ///BUT was destroyed because it became a parent of the game object.....
+            ///This right here is a hack to get around this.
+            if (!this.pooledObjects[i])
+            {
+                pooledObjects[i] = GameObject.Instantiate(pooledObj, Vector3.zero, Quaternion.identity) as GameObject;
+            }
+            
             //look for the first one that is inactive.
             if (pooledObjects[i].activeSelf == false)
             {

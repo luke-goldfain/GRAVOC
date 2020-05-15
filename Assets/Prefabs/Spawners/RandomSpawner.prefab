@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7768701752192071082}
   - component: {fileID: 7768701752192071083}
   - component: {fileID: 7768701752192071124}
-  - component: {fileID: 7768701752192071125}
-  - component: {fileID: 7768701752192071085}
-  - component: {fileID: 7768701752192071086}
-  - component: {fileID: 7768701752192071087}
-  - component: {fileID: 7768701752192071080}
+  - component: {fileID: 8806878899278662604}
+  - component: {fileID: 1592393021628742228}
+  - component: {fileID: 1508859498589360065}
+  - component: {fileID: 7037270347754049827}
+  - component: {fileID: 3672935740980553857}
   m_Layer: 0
   m_Name: RandomSpawner
   m_TagString: Untagged
@@ -60,7 +60,6 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -98,7 +97,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7768701752192071125
+--- !u!114 &8806878899278662604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,15 +106,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7768701752192071126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdabd218c9ee66642840bd5ca47a7393, type: 3}
+  m_Script: {fileID: 11500000, guid: 28d11bdba74a93944ae686aae2e417a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnTime: 2
-  NormalShotPercentage: 0.5
-  PrecisionShotPercentage: 0.4
-  ExplosiveShotPercentage: 0.2
-  ScatterShotPercentage: 0.22
---- !u!114 &7768701752192071085
+  NormalShotPercentage: 0
+  PrecisionShotPercentage: 0
+  ExplosiveShotPercentage: 0
+  ScatterShotPercentage: 0
+--- !u!114 &1592393021628742228
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,24 +123,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7768701752192071126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e70b36ed4df1d014ab6ac7e1b7e816e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SpawnObject: {fileID: 2253429855905782832, guid: 0adb9888647e0d64782511c9eba1706d,
-    type: 3}
-  Enabled: 1
-  objectName: NormalShot
-  Projectile: {fileID: 0}
---- !u!114 &7768701752192071086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768701752192071126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a356116cef981948988c80d6d4449be, type: 3}
+  m_Script: {fileID: 11500000, guid: de7e38039a72f9c408bf4069efc343de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 4482598953223218861, guid: 3094f6153ace8ae42b86cbb8e587328e,
@@ -149,7 +131,7 @@ MonoBehaviour:
   Enabled: 1
   objectName: ExplosiveShot
   Projectile: {fileID: 0}
---- !u!114 &7768701752192071087
+--- !u!114 &1508859498589360065
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,15 +140,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7768701752192071126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f65307eae3e3683448d187987baf6e0b, type: 3}
+  m_Script: {fileID: 11500000, guid: f37017894185ea847bd7708a0ee78aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnObject: {fileID: 8962538737888445748, guid: 3918a96cad92b7844863aa470f379805,
+  SpawnObject: {fileID: 2253429855905782832, guid: 0adb9888647e0d64782511c9eba1706d,
     type: 3}
   Enabled: 1
-  objectName: ScatterShot
+  objectName: NormalShot
   Projectile: {fileID: 0}
---- !u!114 &7768701752192071080
+--- !u!114 &7037270347754049827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,11 +157,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 7768701752192071126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01a67d22293fc2b47b98fe5dc4ed0efe, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fb364f9114f538478bb15bfb027b057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnObject: {fileID: 950907895871818166, guid: 66d5f25908a15f245b868ec2aaf2406a,
     type: 3}
   Enabled: 1
   objectName: PrecisionShot
+  Projectile: {fileID: 0}
+--- !u!114 &3672935740980553857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768701752192071126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4bde47b040ce0640845c16887b3a1f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnObject: {fileID: 8962538737888445748, guid: 3918a96cad92b7844863aa470f379805,
+    type: 3}
+  Enabled: 1
+  objectName: ScatterShot
   Projectile: {fileID: 0}

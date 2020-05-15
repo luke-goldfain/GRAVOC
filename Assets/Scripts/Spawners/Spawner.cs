@@ -72,6 +72,19 @@ public class Spawner : MonoBehaviour, ISpawner
         }
     }
 
+    public void SpawnSubScatter(GameObject caster, int chosenAngle)
+    {
+        if (SpawnerEnabled)
+        {
+            GameObject spawn = this.getSpawnObject();
+            if (spawn != null)
+            {
+                SetupSpawnObject(spawn, caster, chosenAngle);
+                this.AddGameObject(spawn);
+            }
+        }
+    }
+
     protected virtual GameObject getSpawnObject()
     {
         GameObject spawn = (GameObject)Instantiate(SpawnObject, this.transform.position, Quaternion.identity, this.transform);
@@ -90,6 +103,11 @@ public class Spawner : MonoBehaviour, ISpawner
 
     public virtual void SetupSpawnObject(GameObject go, GameObject caster)
     {
-        //go.transform.position = caster.transform.position;
+        go.transform.parent = this.gameObject.transform; //make the spawned object a child of the spawner
+    }
+
+    public virtual void SetupSpawnObject(GameObject go, GameObject caster, int chosenAngle)
+    {
+        go.transform.parent = this.gameObject.transform; //make the spawned object a child of the spawner
     }
 }

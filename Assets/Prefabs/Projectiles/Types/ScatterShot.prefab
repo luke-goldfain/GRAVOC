@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8962538737888445750}
   - component: {fileID: 8962538737888445751}
   - component: {fileID: 8135907305118034201}
+  - component: {fileID: -561222362049260272}
+  - component: {fileID: -5551601160851084800}
   m_Layer: 0
   m_Name: ScatterShot
   m_TagString: Projectile
@@ -109,3 +111,39 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-561222362049260272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962538737888445748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b420de145f32b4bb8e58fcd1a9a322, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 30
+  _maxBounces: 1
+  _currentBounce: 0
+  _damage: 0
+  _state: 0
+  playerReference: {fileID: 0}
+  subScatter: {fileID: -5551601160851084800}
+--- !u!114 &-5551601160851084800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8962538737888445748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022523f55ccd52a41bb03ceecaa2dcb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnObject: {fileID: 4791032656414076327, guid: 4b4bc58316e293247bad8e2376bdfad7,
+    type: 3}
+  Enabled: 1
+  objectName: SubScatterShot
+  Projectile: {fileID: 0}

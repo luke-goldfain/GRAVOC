@@ -118,12 +118,13 @@ public abstract class Projectile : MonoBehaviour, IProjectable
         }
     }
 
-    public void SetUpProjectile()
+    public virtual void SetUpProjectile()
     {
+        this.velocity = new Vector3(0, 0, 0);
         rb = GetComponent<Rigidbody>();
+        rb.velocity = this.velocity;
         this._state = State.SPAWNED;
         this._currentBounce = 0;
-        this.velocity = this.transform.forward * _movementSpeed;
         this.gameObject.SetActive(true);
         this.GetComponent<SphereCollider>().enabled = true;
     }
@@ -164,8 +165,15 @@ public abstract class Projectile : MonoBehaviour, IProjectable
             case State.BOUNCING:
                 velocity = velocity.normalized * _movementSpeed;
                 Debug.DrawLine(transform.position, rb.velocity, Color.green);
+                if(this.transform.parent != null)
+                {
+                    this.transform.parent = null;
+                }
                 Explode();
-
+                break;
+            case State.DONE:
+                this.velocity = new Vector3(0, 0, 0);
+                rb.velocity = new Vector3(0, 0, 0);
                 break;
         }
         rb.velocity = velocity;

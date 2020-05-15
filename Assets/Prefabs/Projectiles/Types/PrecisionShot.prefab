@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 950907895871818160}
   - component: {fileID: 950907895871818161}
   - component: {fileID: 2040158711606768397}
+  - component: {fileID: -5294423436343859055}
   m_Layer: 0
   m_Name: PrecisionShot
   m_TagString: Projectile
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 950907895871818166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.37975597, y: 0.74434614, z: 1.9492407}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,3 +110,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5294423436343859055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950907895871818166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80a4bec59d3b284fa0c1713e20b8165, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movementSpeed: 50
+  _maxBounces: 4
+  _currentBounce: 0
+  _damage: 0
+  _state: 0
+  playerReference: {fileID: 0}
