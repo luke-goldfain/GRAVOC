@@ -29,7 +29,7 @@ public class ProjectileSpawner : PooledSpawner
         }
     }
 
-    public override void SetupSpawnObject(GameObject go, GameObject caster, int chosenAngle)
+    public override void SetupSpawnObject(GameObject go, GameObject caster, int chosenAngle, PlayerController pRef)
     {
         base.SetupSpawnObject(go);
         if (go.GetComponent<Projectile>() != null)
@@ -40,6 +40,7 @@ public class ProjectileSpawner : PooledSpawner
             gs.GetComponent<SubScatterShot>()._state = State.BOUNCING;
             gs.GetComponent<SubScatterShot>().IsInstantiatedByScatterShots = true;
             gs.GetComponent<SubScatterShot>().ChosenAngle = chosenAngle;
+            gs.GetComponent<SubScatterShot>().playerReference = pRef;
         }
     }
 

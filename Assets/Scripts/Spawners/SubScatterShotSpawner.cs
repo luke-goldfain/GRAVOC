@@ -11,9 +11,9 @@ public class SubScatterShotSpawner : ProjectileSpawner
         base.removeObjectInListToRemove();
     }
 
-    public void SpawnTheObject(GameObject go, int chosenAngle)
+    public void SpawnTheObject(GameObject go, int chosenAngle, PlayerController pRef)
     {
-        this.SpawnSubScatter(go, chosenAngle);
+        this.SpawnSubScatter(go, chosenAngle, pRef);
 
     }
 }

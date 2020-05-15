@@ -110,4 +110,4 @@ MonoBehaviour:
   Enabled: 1
   objectName: ExplosiveShot
   Projectile: {fileID: 0}
-  SpawnTime: 0
+  SpawnTime: 4

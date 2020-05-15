@@ -242,8 +242,8 @@ using UnityEngine;
         {
             if (this.doSpawnScatter)
             {
-            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, ChosenAngle);
-            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, -ChosenAngle);
+            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, ChosenAngle, this.playerReference);
+            this.subScatter.GetComponent<SubScatterShotSpawner>().SpawnTheObject(this.gameObject, -ChosenAngle, this.playerReference);
 
             this.doSpawnScatter = false;
             }

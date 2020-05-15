@@ -365,6 +365,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Explosion")
+        {
+            this.rb.AddForce((Vector3.Normalize(this.transform.position - other.transform.position) + Vector3.up) * 400f);
+        }
+    }
+
     //private void OnCollisionStay(Collision collision)
     //{
     //    if (currentMovState != MovementState.onGround && Physics.Raycast(this.transform.position, Vector3.down, out RaycastHit hit, 1.2f, ~(1 << 8)) && hit.collider == collision.collider)

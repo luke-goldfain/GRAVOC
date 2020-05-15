@@ -110,4 +110,4 @@ MonoBehaviour:
   Enabled: 1
   objectName: NormalShot
   Projectile: {fileID: 0}
-  SpawnTime: 0
+  SpawnTime: 2

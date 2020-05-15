@@ -13,7 +13,7 @@ public class UnityScoreManager : MonoBehaviour
 
     [SerializeField]
     private Text p1scoreText, p2scoreText, winText;
-
+    
     private Color p1color, p2color;
 
     private bool scoreReached;
